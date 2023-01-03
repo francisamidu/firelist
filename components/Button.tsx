@@ -6,7 +6,7 @@ type ButtonProps = {
 };
 const Button = ({ text }: ButtonProps) => {
   return (
-    <IButton color="blue-gray" variant="outlined">
+    <IButton className="bg-midnight-300 shadow-none" variant="filled">
       {text}
     </IButton>
   );

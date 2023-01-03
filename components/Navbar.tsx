@@ -6,10 +6,13 @@ import Button from "./Button";
 
 const Nav = () => {
   return (
-    <Navbar className="py-3 border-b border-b-gray-100" blurred>
+    <Navbar className="py-3 border-b border-b-gray-100 rounded-none" blurred>
       <div className="md:max-w-screen-lg md:mx-auto flex flex-row items-center justify-between">
-        <Link href="/">
-          <span>{shared.name}</span>
+        <Link
+          href="/"
+          className="text-midnight-300 uppercase text-sm font-bold"
+        >
+          {shared.name}
         </Link>
         <Button text="Login" />
       </div>
