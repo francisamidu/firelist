@@ -6,7 +6,11 @@ import Button from "./Button";
 
 const Nav = () => {
   return (
-    <Navbar className="py-3 border-b border-b-gray-100 rounded-none" blurred>
+    <Navbar
+      className="py-2 border-b border-b-gray-100 rounded-none fixed top-0 left-0 z-10"
+      blurred
+      fullWidth
+    >
       <div className="md:max-w-screen-lg md:mx-auto flex flex-row items-center justify-between">
         <Link
           href="/"
