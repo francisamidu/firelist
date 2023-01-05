@@ -3,11 +3,10 @@ import { Button, Layout } from "../components";
 import { Button as MButton } from "@material-tailwind/react";
 import shared from "../shared.json";
 
-const Signup = () => {
+const Signin = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    repPassword: "",
   });
   return (
     <section className="bg-gray-50">
@@ -15,7 +14,7 @@ const Signup = () => {
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl text-blue-gray-600 text-center">
-              Signup up for a {shared.name} account
+              Login to {shared.name}
             </h1>
             <form className="space-y-4 md:space-y-6" action="#">
               <div>
@@ -32,7 +31,6 @@ const Signup = () => {
                       email: event.target.value,
                     })
                   }
-                  id="email"
                   className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg block w-full p-2.5  
                         "
                   placeholder="name@company.com"
@@ -57,28 +55,14 @@ const Signup = () => {
                         "
                 />
               </div>
-              <div>
-                <label className="block mb-2 text-sm font-bold text-blue-gray-600">
-                  Repeat Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  value={user.repPassword}
-                  onChange={(event) =>
-                    setUser({
-                      ...user,
-                      repPassword: event.target.value,
-                    })
-                  }
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg block w-full p-2.5 outline-none  
-                        "
-                />
+              <div className="flex flex-row !mt-0 justify-end">
+                <MButton className="bg-white text-blue-gray-500 mr-2 shadow-none border-none hover:shadow-none hover:text-midnight-300 px-1 !mt-2">
+                  Forgot Password?
+                </MButton>
               </div>
               <Button text="Signin" className="w-full !mt-1" />
               <p className="text-sm font-light text-blue-gray-500 dark:text-gray-400">
-                Have an account already?{" "}
+                Don{`’`}t have an account yet?{" "}
                 <MButton className="bg-white text-blue-gray-500 mr-2 shadow-none border-none hover:shadow-none hover:text-midnight-300">
                   Signin
                 </MButton>
@@ -91,12 +75,12 @@ const Signup = () => {
   );
 };
 
-Signup.getLayout = (page: ReactNode) => {
+Signin.getLayout = (page: ReactNode) => {
   return (
-    <Layout page="Signup" loggedIn={false}>
+    <Layout page="Signin" loggedIn={false}>
       {page}
     </Layout>
   );
 };
 
-export default Signup;
+export default Signin;
