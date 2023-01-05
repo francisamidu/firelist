@@ -6,8 +6,9 @@ const { name, description } = shared;
 
 interface LayoutProps extends Partial<PropsWithChildren> {
   page: string;
+  loggedIn: boolean;
 }
-const Layout = ({ children, page }: LayoutProps) => {
+const Layout = ({ children, loggedIn, page }: LayoutProps) => {
   return (
     <>
       <Head>
@@ -18,7 +19,7 @@ const Layout = ({ children, page }: LayoutProps) => {
         <meta name="description" content={description}></meta>
       </Head>
       <main className="flex flex-col justify-between min-h-screen">
-        <Navbar />
+        <Navbar loggedIn={loggedIn} />
         {children}
         <Footer />
       </main>

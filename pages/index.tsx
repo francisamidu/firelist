@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { ReactNode } from "react";
-import { Header, Layout, Navbar } from "../components";
+import { Header, Layout } from "../components";
 import shared from "../shared.json";
 const { description, name } = shared;
 
@@ -13,14 +13,17 @@ const Index = () => {
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
       <Header />
     </>
   );
 };
 
 Index.getLayout = (page: ReactNode) => {
-  return <Layout page="Home">{page}</Layout>;
+  return (
+    <Layout page="Home" loggedIn={false}>
+      {page}
+    </Layout>
+  );
 };
 
 export default Index;
