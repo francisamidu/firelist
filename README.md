@@ -1,6 +1,6 @@
 This is a firebase-powered todo app that works
 
-## Firelist [http://firelist.netlify.app](http://firelist.netlify.app)
+## Firelist [https://firelist.netlify.app](https://firelist.netlify.app)
 
 ## Features
 
@@ -15,8 +15,13 @@ This is a firebase-powered todo app that works
 
 ## Technologies used
 
-- React [http://reactjs.org](http://reactjs.org)
-- Next.js [http://nextjs.org](http://nextjs.org)
-- TailwindCss [http://tailwindcss.com](http://tailwindcss.com)
-- Material Tailwind [http://material-tailwind.com](http://material-tailwind.com)
-- Firebase [http://firebase.google.com](http://firebase.google.com)
+- React [https://reactjs.org](https://reactjs.org)
+- Next.js [https://nextjs.org](https://nextjs.org)
+- TailwindCss [https://tailwindcss.com](https://tailwindcss.com)
+- Material Tailwind [https://material-tailwind.com](https://material-tailwind.com)
+- Firebase [https://firebase.google.com](https://firebase.google.com)
+
+## APIs used
+
+- Ipdata [https://ipdata.co](https://ipdata.co)
+- Openweather [https://openweathermap.org/api](https://openweathermap.org/api)
