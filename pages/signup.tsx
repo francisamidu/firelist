@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from "react";
 import { Button, Layout } from "../components";
-import { Button as MButton } from "@material-tailwind/react";
 import shared from "../shared.json";
+import Link from "next/link";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -77,12 +77,15 @@ const Signup = () => {
                 />
               </div>
               <Button text="Signin" className="w-full !mt-1" />
-              <p className="text-sm font-light text-blue-gray-500 dark:text-gray-400">
-                Have an account already?{" "}
-                <MButton className="bg-white text-blue-gray-500 mr-2 shadow-none border-none hover:shadow-none hover:text-midnight-300">
+              <div className="text-sm font-light text-blue-gray-700 dark:text-gray-400 flex flex-row items-center">
+                <span>Have an account already?</span>
+                <Link
+                  href="/signin"
+                  className="bg-white text-blue-gray-500 ml-2 shadow-none border-none hover:shadow-none hover:text-midnight-300 !capitalize !p-0"
+                >
                   Signin
-                </MButton>
-              </p>
+                </Link>
+              </div>
             </form>
           </div>
         </div>

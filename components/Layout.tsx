@@ -12,9 +12,7 @@ const Layout = ({ children, loggedIn, page }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>
-          {page} - {name}
-        </title>
+        <title>{`${page} - ${name}`}</title>
         <meta name="title" content={`${page} | ${name}`}></meta>
         <meta name="description" content={description}></meta>
       </Head>
