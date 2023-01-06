@@ -5,8 +5,10 @@ import Link from "next/link";
 import { Alert } from "@material-tailwind/react";
 import { signin } from "../utils";
 import { Status } from "../types";
+import { useRouter } from "next/router";
 
 const Signin = () => {
+  const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -22,6 +24,13 @@ const Signin = () => {
     }
     try {
       await signin(user.email, user.password);
+      setStatus({
+        status: "success",
+        message: `Logged in as ${user.email}`,
+      });
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 5000);
     } catch (error) {
       setStatus({
         status: "failed",
@@ -31,9 +40,14 @@ const Signin = () => {
   };
   return (
     <section className="bg-gray-50">
-      <Alert color={status.status === "failed" ? "red" : "green"}>
-        {status.message}
-      </Alert>
+      <div className="mt-8 w-2/5">
+        <Alert
+          show={status.message !== ""}
+          color={status.status === "failed" ? "red" : "green"}
+        >
+          {status.message}
+        </Alert>
+      </div>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -79,9 +93,9 @@ const Signin = () => {
                         "
                 />
               </div>
-              <div className="flex flex-row !mt-0 justify-end">
+              <div className="flex flex-row !my-2 justify-end">
                 <Link
-                  href="/reset-password"
+                  href="/password-reset"
                   className="bg-white text-blue-gray-500 mr-2 hover:text-midnight-300 px-1 !mt-2"
                 >
                   Forgot Password?
@@ -98,7 +112,7 @@ const Signin = () => {
                   href="/signup"
                   className="bg-white text-blue-gray-500 ml-2 hover:text-midnight-300 !capitalize !p-0"
                 >
-                  Signin
+                  Signup
                 </Link>
               </div>
             </form>

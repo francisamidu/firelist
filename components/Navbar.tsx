@@ -19,8 +19,7 @@ const Nav = ({ loggedIn }: NavProps) => {
   };
   return (
     <Navbar
-      className="py-2 border-b border-b-gray-100 rounded-none fixed top-0 left-0 z-10"
-      blurred
+      className="py-2 bg-white border-b border-b-gray-100 rounded-none fixed top-0 left-0 z-10"
       fullWidth
     >
       <div className="md:max-w-screen-lg md:mx-auto flex flex-row items-center justify-between">
