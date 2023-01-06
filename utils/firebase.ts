@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import * as firebase from "firebase/app";
+import { browserSessionPersistence, getAuth } from "firebase/auth";
+import { getApps } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import getConfig from "next/config";
+
+const apps = getApps();
 const { publicRuntimeConfig } = getConfig();
 const {
   FIREBASE_AUTH_DOMAIN,
@@ -21,5 +26,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export default app;
+const app = firebase.initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore();
+if (typeof window !== "undefined" && !apps.length) {
+  auth.setPersistence(browserSessionPersistence);
+}
+export { app, auth, db };
