@@ -1,3 +1,4 @@
 import Todo from "./Todo";
 import Result from "./Result";
-export type { Todo, Result };
+import Status from "./Status";
+export type { Todo, Result, Status };

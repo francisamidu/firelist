@@ -2,6 +2,9 @@ import React, { ReactNode, useState } from "react";
 import { Button, Layout } from "../components";
 import shared from "../shared.json";
 import Link from "next/link";
+import { Alert } from "@material-tailwind/react";
+import { signin } from "../utils";
+import { Status } from "../types";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -9,8 +12,29 @@ const Signup = () => {
     password: "",
     repPassword: "",
   });
+  const [status, setStatus] = useState<Status>({
+    status: "success",
+    message: "",
+  });
+  const handleSubmit = async () => {
+    const set = Object.values(user).every((el) => el !== "");
+    if (!set) {
+      return;
+    }
+    try {
+      await signin(user.email, user.password);
+    } catch (error) {
+      setStatus({
+        status: "failed",
+        message: error.message,
+      });
+    }
+  };
   return (
     <section className="bg-gray-50">
+      <Alert color={status.status === "failed" ? "red" : "green"}>
+        {status.message}
+      </Alert>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -76,7 +100,11 @@ const Signup = () => {
                         "
                 />
               </div>
-              <Button text="Signin" className="w-full !mt-1" />
+              <Button
+                text="Signin"
+                className="w-full !mt-1"
+                onClick={() => handleSubmit()}
+              />
               <div className="text-sm font-light text-blue-gray-700 dark:text-gray-400 flex flex-row items-center">
                 <span>Have an account already?</span>
                 <Link
