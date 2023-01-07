@@ -23,21 +23,22 @@ const Signup = () => {
     if (!set) {
       return;
     }
-    try {
-      await signup(user.email, user.password);
-      setStatus({
-        status: "success",
-        message: `Sent email verification to ${user.email}`,
+    signup(user.email, user.password)
+      .then(() => {
+        setStatus({
+          status: "success",
+          message: `Sent email verification to ${user.email}`,
+        });
+        setTimeout(() => {
+          router.push("/signin");
+        }, 5000);
+      })
+      .catch((error) => {
+        setStatus({
+          status: "failed",
+          message: error.message,
+        });
       });
-      setTimeout(() => {
-        router.push("/signin");
-      }, 5000);
-    } catch (error) {
-      setStatus({
-        status: "failed",
-        message: error.message,
-      });
-    }
   };
   return (
     <section className="bg-gray-50">

@@ -14,6 +14,10 @@ const Document = () => {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap"
           rel="stylesheet"
         />
+        {/* <link
+          href="https://fonts.cdnfonts.com/css/sofia-pro"
+          rel="stylesheet"
+        /> */}
       </Head>
       <body>
         <Main />

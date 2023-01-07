@@ -22,25 +22,26 @@ const Signin = () => {
     if (!set) {
       return;
     }
-    try {
-      await signin(user.email, user.password);
-      setStatus({
-        status: "success",
-        message: `Logged in as ${user.email}`,
+    signin(user.email, user.password)
+      .then(() => {
+        setStatus({
+          status: "success",
+          message: `Logged in as ${user.email}`,
+        });
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 5000);
+      })
+      .catch((error) => {
+        setStatus({
+          status: "failed",
+          message: error.message,
+        });
       });
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 5000);
-    } catch (error) {
-      setStatus({
-        status: "failed",
-        message: error.message,
-      });
-    }
   };
   return (
     <section className="bg-gray-50">
-      <div className="mt-8 w-2/5">
+      <div className="mt-10 w-3/5 flex flex-row items-center justify-center">
         <Alert
           show={status.message !== ""}
           color={status.status === "failed" ? "red" : "green"}
