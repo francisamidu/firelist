@@ -19,6 +19,10 @@ module.exports = withMT({
           700: "#5f021f",
           900: "8c001a"
         }
+      },
+      fontFamily: {
+        sans: ["Inter"],
+        body: ["Inter"],
       }
     },
   },

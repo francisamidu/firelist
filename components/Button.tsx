@@ -1,11 +1,7 @@
 import React from "react";
 import { Button as IButton } from "@material-tailwind/react";
+import { ButtonProps } from "../types";
 
-type ButtonProps = {
-  className?: string;
-  text: string;
-  onClick?: (args?: any) => void;
-};
 const Button = ({ className, text, onClick }: ButtonProps) => {
   const handleClick = typeof onClick === "function" ? onClick : () => {};
   const classes = className

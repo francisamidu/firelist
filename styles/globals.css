@@ -6,7 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Inter, Roboto, sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 a {
@@ -16,4 +16,9 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
 }

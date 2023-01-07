@@ -5,10 +5,8 @@ import shared from "../shared.json";
 import Button from "./Button";
 import { Button as MButton } from "@material-tailwind/react";
 import { useRouter } from "next/router";
+import { NavProps } from "../types";
 
-type NavProps = {
-  loggedIn: boolean;
-};
 const Nav = ({ loggedIn }: NavProps) => {
   const router = useRouter();
   const redirectToSignup = () => {

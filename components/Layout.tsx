@@ -2,12 +2,9 @@ import Head from "next/head";
 import React, { PropsWithChildren } from "react";
 import { Footer, Navbar } from ".";
 import shared from "../shared.json";
+import { LayoutProps } from "../types";
 const { name, description } = shared;
 
-interface LayoutProps extends Partial<PropsWithChildren> {
-  page: string;
-  loggedIn: boolean;
-}
 const Layout = ({ children, loggedIn, page }: LayoutProps) => {
   return (
     <>
