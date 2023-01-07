@@ -12,7 +12,7 @@ const Content = ({ name }: ContentProps) => {
         return <Todos />;
     }
   };
-  return <div>{renderComponent()}</div>;
+  return <>{renderComponent()}</>;
 };
 
 export default Content;

@@ -32,7 +32,7 @@ const Sidebar = ({ setComponent }: SidebarProps) => {
           <Icon
             size={18}
             className={`${
-              tab.active ? "text-white" : "text-blue-gray-600 mr-2"
+              tab.active ? "text-white  mr-3" : "text-blue-gray-600 mr-3"
             }`}
           />
         );
@@ -41,7 +41,7 @@ const Sidebar = ({ setComponent }: SidebarProps) => {
           <User
             size={18}
             className={`${
-              tab.active ? "text-white" : "text-blue-gray-600 mr-2"
+              tab.active ? "text-white  mr-3" : "text-blue-gray-600 mr-3"
             }`}
           />
         );
@@ -54,7 +54,7 @@ const Sidebar = ({ setComponent }: SidebarProps) => {
       <h1 className="my-2 font-bold text-blue-gray-800">Menu</h1>
       {tabs.map((tab, index) => (
         <div
-          className={`bg-white rounded py-2 px-3 w-[150px] flex flex-row items-center cursor-pointer transition-colors duration-200 mb-2 ${
+          className={`bg-white rounded py-2 px-3 w-[170px] flex flex-row items-center cursor-pointer transition-colors duration-200 mb-2 ${
             tab.active ? "bg-midnight-300 " : ""
           }`}
           key={index}
