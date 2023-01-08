@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 import { Todo as ITodo } from "../types";
-import { Todo } from ".";
+import { Dropdown, Todo } from ".";
 
 const Todos = () => {
   const [todos, setTodos] = useState<ITodo[]>([
@@ -16,8 +16,18 @@ const Todos = () => {
       done: false,
     },
     {
-      id: "3",
-      title: "Finish the Animescraper project",
+      id: "7",
+      title: "Finish MealAssistant project",
+      done: false,
+    },
+    {
+      id: "8",
+      title: "Finish Task project",
+      done: false,
+    },
+    {
+      id: "9",
+      title: "Learn Svelte for real",
       done: false,
     },
     {
@@ -41,34 +51,50 @@ const Todos = () => {
     todos: todos.length,
     completed: todos.filter((t) => t.done === true).length,
   });
+
+  const handleDropdownClick = () => {};
   useEffect(() => {
     setCompleted(todos.filter((t) => t.done === true));
   }, [todos]);
   return (
-    <div className="px-3">
-      <h1 className="my-2 font-bold text-blue-gray-800">Todos</h1>
+    <div className="px-3 max-h-[100vh] overflow-y-auto">
+      <div className="flex flex-row items-center justify-between">
+        <h1 className="my-2 font-bold text-blue-gray-800">Todos</h1>
+        <div className="flex flex-row items-center">
+          <Dropdown label="Sort" handler={handleDropdownClick} />
+          <Dropdown label="Filter" handler={handleDropdownClick} />
+        </div>
+      </div>
       <div className="mt-5 flex flex-row items-center hover:cursor-pointer p-2">
         <Plus className="text-midnight-300 mr-3" size={18} />
         <span className="text-blue-gray-600">Add Todo</span>
       </div>
+      <div>
+        <div className="todos-container">
+          <h2 className="my-4 font-bold text-blue-gray-800">
+            Todos - {todoStat.todos}
+          </h2>
 
-      <div className="todos-container">
-        <h2 className="my-4 font-bold text-blue-gray-800">
-          Todos - {todoStat.todos}
-        </h2>
-        {todos
-          .filter((t) => !t.done)
-          .map((todo) => (
+          {todos
+            .filter((t) => !t.done)
+            .map((todo) => (
+              <Todo
+                todo={todo}
+                key={todo.id}
+                todos={todos}
+                setTodos={setTodos}
+              />
+            ))}
+        </div>
+        <div className="todos-container">
+          <h2 className="my-4 font-bold text-blue-gray-800">
+            Completed - {todoStat.completed}
+          </h2>
+
+          {completed.map((todo) => (
             <Todo todo={todo} key={todo.id} todos={todos} setTodos={setTodos} />
           ))}
-      </div>
-      <div className="todos-container">
-        <h2 className="my-4 font-bold text-blue-gray-800">
-          Completed - {todoStat.completed}
-        </h2>
-        {completed.map((todo) => (
-          <Todo todo={todo} key={todo.id} todos={todos} setTodos={setTodos} />
-        ))}
+        </div>
       </div>
     </div>
   );
