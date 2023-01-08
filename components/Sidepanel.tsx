@@ -13,7 +13,9 @@ const Sidepanel = () => {
     city: "",
     country: "",
   });
-  const { data } = useSwr<IpDataResponse>("api/ipdata", getIpData);
+  const { data } = useSwr<IpDataResponse>("api/ipdata", getIpData, {
+    errorRetryCount: 0,
+  });
 
   useEffect(() => {
     const intervalId = setInterval(() => {
