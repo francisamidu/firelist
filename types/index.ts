@@ -1,6 +1,7 @@
 import ButtonProps from "./ButtonProps";
 import ContentProps from "./ContentProps";
 import IpData from "./IpData";
+import IpDataResponse from "./IpDataResponse";
 import LayoutProps from "./LayoutProps";
 import NavProps from "./NavProps";
 import Result from "./Result";
@@ -13,6 +14,7 @@ export type {
   ButtonProps,
   ContentProps,
   IpData,
+  IpDataResponse,
   LayoutProps,
   NavProps,
   Tab,

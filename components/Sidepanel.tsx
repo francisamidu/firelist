@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import { formatDate, formatTime } from "../utils";
 import useSwr from "swr";
 import { getIpData } from "../utils/getIpData";
-import { IpData } from "../types";
+import { IpData, IpDataResponse } from "../types";
 
 const Sidepanel = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [timezone, setTimezone] = useState("");
-  const { data, error } = useSwr<IpData>("api/ipdata", getIpData);
+  const [isSet, setIsSet] = useState(false);
+  const [userInfo, setUserInfo] = useState<IpData>({
+    city: "",
+    country: "",
+  });
+  const { data } = useSwr<IpDataResponse>("api/ipdata", getIpData);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,9 +32,14 @@ const Sidepanel = () => {
   useEffect(() => {
     setTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
     setTimeAndDate();
-    console.log(data);
-    console.log(error);
-  }, []);
+    if (data) {
+      setUserInfo({
+        city: data.city,
+        country: data.country_name,
+      });
+    }
+    setIsSet(Object.values(userInfo).every((val) => val != ""));
+  }, [data]);
 
   return (
     <div className="px-3">
@@ -37,7 +47,12 @@ const Sidepanel = () => {
       <div className="mt-5 text-blue-gray-800">
         <h2 className="text-5xl text-center font-bold">{date}</h2>
         <h3 className="text-3xl text-center my-3">{time}</h3>
-        <h4 className="text-1xl text-center mt-3">{timezone}</h4>
+        <h4 className="text-1xl text-center my-3">{timezone}</h4>
+        {isSet ? (
+          <h5 className="text-1xl text-center my-3">
+            {userInfo.city} - {userInfo.country}
+          </h5>
+        ) : null}
       </div>
     </div>
   );
