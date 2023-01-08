@@ -22,3 +22,12 @@ a {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 }
+@media screen and (max-width: 576px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.todos-container label {
+  padding: 12px;
+}

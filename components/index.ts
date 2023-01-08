@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
 import Sidepanel from "./Sidepanel";
+import Todo from "./Todo";
 import Todos from "./Todos";
 
 export {
@@ -19,5 +20,6 @@ export {
   Profile,
   Sidebar,
   Sidepanel,
+  Todo,
   Todos,
 };
