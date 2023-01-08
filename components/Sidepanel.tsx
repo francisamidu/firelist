@@ -21,6 +21,8 @@ const Sidepanel = () => {
   });
 
   useEffect(() => {
+    if (error) console.log(error);
+
     console.log(data);
   }, [data]);
 
