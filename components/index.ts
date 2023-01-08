@@ -1,5 +1,6 @@
 import Button from "./Button";
 import Content from "./Content";
+import Dropdown from "./Dropdown";
 import Footer from "./Footer";
 import Header from "./Header";
 import Layout from "./Layout";
@@ -13,6 +14,7 @@ import Todos from "./Todos";
 export {
   Button,
   Content,
+  Dropdown,
   Navbar,
   Header,
   Footer,
