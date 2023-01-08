@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { formatDate, formatTime, getIpData } from "../utils";
+import { formatDate, formatTime } from "../utils";
+import { useFetch } from "use-http";
 
-const Sidepanel = (context: any) => {
+import getConfig from "next/config";
+const { IPDATA_API_KEY } = getConfig();
+
+const Sidepanel = () => {
   const [date, setDate] = useState(formatDate(new Date()));
   const [time, setTime] = useState(new Date());
+  const URL = `https://api.ipdata.co?api-key=${IPDATA_API_KEY}`;
+  const { data, error } = useFetch(URL, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -15,10 +21,9 @@ const Sidepanel = (context: any) => {
   });
 
   useEffect(() => {
-    getIpData()
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
-  }, []);
+    console.log(data);
+  }, [data]);
+
   return (
     <div className="px-3">
       <h1 className="my-2 font-bold text-blue-gray-800">Status</h1>
