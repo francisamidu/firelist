@@ -2,7 +2,6 @@ import { User } from "firebase/auth";
 import Head from "next/head";
 import React, { useState } from "react";
 import { Content, Sidepanel, Sidebar } from "../../components";
-import { auth } from "../../utils/firebase";
 type DashboardProps = {
   user: User;
 };

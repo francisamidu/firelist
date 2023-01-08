@@ -1,5 +1,6 @@
 import ButtonProps from "./ButtonProps";
 import ContentProps from "./ContentProps";
+import IpData from "./IpData";
 import LayoutProps from "./LayoutProps";
 import NavProps from "./NavProps";
 import Result from "./Result";
@@ -11,6 +12,7 @@ import Todo from "./Todo";
 export type {
   ButtonProps,
   ContentProps,
+  IpData,
   LayoutProps,
   NavProps,
   Tab,
