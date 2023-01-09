@@ -3,8 +3,8 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
+import { auth } from ".";
 
-const auth = getAuth();
 export const signup = async (email: string, password: string) => {
   try {
     createUserWithEmailAndPassword(auth, email, password).then(

@@ -1,5 +1,10 @@
 import { app, auth, db } from "./firebase";
-import { formatDate, formatTime, formatTimeRelative } from "./format";
+import {
+  formatDate,
+  formatDateVar,
+  formatTime,
+  formatTimeRelative,
+} from "./format";
 import { sendPasswordResetCode } from "./password-reset";
 import { signin } from "./signin";
 import { signup } from "./signup";
@@ -9,6 +14,7 @@ export {
   auth,
   db,
   formatDate,
+  formatDateVar,
   formatTime,
   formatTimeRelative,
   sendPasswordResetCode,

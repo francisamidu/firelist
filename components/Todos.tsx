@@ -7,43 +7,67 @@ const Todos = () => {
   const [todos, setTodos] = useState<ITodo[]>([
     {
       id: "1",
-      title: "Finish this project",
       done: false,
+      description:
+        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
+      title: "Finish this project",
+      createdDate: new Date(),
     },
     {
       id: "2",
-      title: "Finish Ytb Downloader project",
       done: false,
+      description:
+        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
+      title: "Finish Ytb Downloader project",
+      createdDate: new Date(),
     },
     {
       id: "7",
-      title: "Finish MealAssistant project",
+      description:
+        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
       done: false,
+      title: "Finish MealAssistant project",
+      createdDate: new Date(),
     },
     {
       id: "8",
-      title: "Finish Task project",
+      description:
+        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
       done: false,
+      title: "Finish Task project",
+      createdDate: new Date(),
     },
     {
       id: "9",
-      title: "Learn Svelte for real",
+      description:
+        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
       done: false,
+      title: "Learn Svelte for real",
+      createdDate: new Date(),
     },
     {
       id: "4",
-      title: "Revamp your portfolio",
+      description:
+        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
       done: true,
+      title: "Revamp your portfolio",
+      createdDate: new Date(),
     },
     {
       id: "5",
-      title: "Create a twitter account",
+      description:
+        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
       done: true,
+      title: "Create a twitter account",
+      createdDate: new Date(),
     },
     {
       id: "6",
-      title: "Reach 10 commits in the first 8 days of 2023",
+      description:
+        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
       done: true,
+      title: "Reach 10 commits in the first 8 days of 2023",
+      createdDate: new Date(),
     },
   ]);
   const [completed, setCompleted] = useState<ITodo[]>([]);
