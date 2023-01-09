@@ -4,6 +4,7 @@ import Dropdown from "./Dropdown";
 import Footer from "./Footer";
 import Header from "./Header";
 import Layout from "./Layout";
+import MakeTodo from "./MakeTodo";
 import Navbar from "./Navbar";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
@@ -15,10 +16,11 @@ export {
   Button,
   Content,
   Dropdown,
-  Navbar,
   Header,
   Footer,
   Layout,
+  Navbar,
+  MakeTodo,
   Profile,
   Sidebar,
   Sidepanel,

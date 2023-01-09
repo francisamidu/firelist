@@ -1,5 +1,6 @@
 import ButtonProps from "./ButtonProps";
 import ContentProps from "./ContentProps";
+import DialogProps from "./DialogProps";
 import IpData from "./IpData";
 import IpDataResponse from "./IpDataResponse";
 import LayoutProps from "./LayoutProps";
@@ -13,6 +14,7 @@ import Todo from "./Todo";
 export type {
   ButtonProps,
   ContentProps,
+  DialogProps,
   IpData,
   IpDataResponse,
   LayoutProps,
