@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 import { Todo as ITodo } from "../types";
-import { Dropdown, Todo } from ".";
+import { Dropdown, MakeTodo, Todo } from ".";
 
 const Todos = () => {
   const [todos, setTodos] = useState<ITodo[]>([
@@ -75,13 +75,16 @@ const Todos = () => {
     todos: todos.length,
     completed: todos.filter((t) => t.done === true).length,
   });
+  const [open, setOpen] = useState(false);
 
+  const handleAddClick = () => setOpen(!open);
   const handleDropdownClick = () => {};
   useEffect(() => {
     setCompleted(todos.filter((t) => t.done === true));
   }, [todos]);
   return (
     <div className="px-3 max-h-[100vh] overflow-y-auto">
+      <MakeTodo open={open} setOpen={setOpen} />
       <div className="flex flex-row items-center justify-between">
         <h1 className="my-2 font-bold text-blue-gray-800">Todos</h1>
         <div className="flex flex-row items-center">
@@ -89,7 +92,10 @@ const Todos = () => {
           <Dropdown label="Filter" handler={handleDropdownClick} />
         </div>
       </div>
-      <div className="mt-5 flex flex-row items-center hover:cursor-pointer p-2 w-max">
+      <div
+        className="mt-5 flex flex-row items-center hover:cursor-pointer py-2 w-max"
+        onClick={handleAddClick}
+      >
         <Plus className="text-midnight-300 mr-3" size={18} />
         <span className="text-blue-gray-600">Add Todo</span>
       </div>

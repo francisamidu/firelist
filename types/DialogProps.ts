@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import Todo from "./Todo";
 
 type DialogProps = {
-  todo: Todo;
+  todo?: Todo;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 };

@@ -45,8 +45,7 @@ const Sidepanel = () => {
 
   return (
     <div className="px-3">
-      <h1 className="my-2 font-bold text-blue-gray-800">Status</h1>
-      <div className="mt-5 text-blue-gray-800">
+      <div className="mt-7 text-blue-gray-800">
         <h2 className="text-5xl text-center font-bold">{date}</h2>
         <h3 className="text-3xl text-center my-3">{time}</h3>
         <h4 className="text-1xl text-center my-3">{timezone}</h4>
