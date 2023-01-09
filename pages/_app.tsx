@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "@fontsource/inter";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "@material-tailwind/react";
 import { NextPage } from "next";

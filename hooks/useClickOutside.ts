@@ -1,4 +1,4 @@
-import { useEffect, RefObject } from "react";
+import { useEffect, RefObject, createRef } from "react";
 
 const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,
@@ -10,7 +10,6 @@ const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
       if (!el || el.contains((event?.target as Node) || null)) {
         return;
       }
-
       handler(event);
     };
     document.addEventListener("mousedown", listener);

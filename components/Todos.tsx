@@ -89,7 +89,7 @@ const Todos = () => {
           <Dropdown label="Filter" handler={handleDropdownClick} />
         </div>
       </div>
-      <div className="mt-5 flex flex-row items-center hover:cursor-pointer p-2">
+      <div className="mt-5 flex flex-row items-center hover:cursor-pointer p-2 w-max">
         <Plus className="text-midnight-300 mr-3" size={18} />
         <span className="text-blue-gray-600">Add Todo</span>
       </div>
