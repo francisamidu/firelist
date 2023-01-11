@@ -1,11 +1,8 @@
 import React, { MouseEvent, MutableRefObject, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { useClickOutside } from "../hooks";
+import { DropdownProps } from "../types";
 
-type DropdownProps = {
-  label: string;
-  handler: () => void;
-};
 const Dropdown = ({ label, handler }: DropdownProps) => {
   const dropdownRef: MutableRefObject<any> = useRef();
 
@@ -23,6 +20,13 @@ const Dropdown = ({ label, handler }: DropdownProps) => {
     } else {
       hide();
     }
+  };
+  const handleOptionClick = (
+    event: MouseEvent<HTMLElement, globalThis.MouseEvent>
+  ) => {
+    const target: any = event.target;
+    handler(target.dataset.value);
+    hide();
   };
   useClickOutside(dropdownRef, hide);
   return (
@@ -44,33 +48,33 @@ const Dropdown = ({ label, handler }: DropdownProps) => {
           {label === "Sort" ? (
             <div className="flex flex-col">
               <span
-                data-value="date-asc"
+                data-value="sort-date-asc"
                 className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
-                onClick={() => hide()}
+                onClick={(event) => handleOptionClick(event)}
               >
                 Date (Asc)
               </span>
               <span
-                data-value="date-desc"
+                data-value="sort-date-desc"
                 className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
-                onClick={() => hide()}
+                onClick={(event) => handleOptionClick(event)}
               >
-                Date (Asc)
+                Date (Desc)
               </span>
             </div>
           ) : (
             <div className="flex flex-col">
               <span
-                data-value="completed"
+                data-value="filter-completed"
                 className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
-                onClick={() => hide()}
+                onClick={(event) => handleOptionClick(event)}
               >
                 Completed
               </span>
               <span
-                data-value="incomplete"
+                data-value="filter-incomplete"
                 className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
-                onClick={() => hide()}
+                onClick={(event) => handleOptionClick(event)}
               >
                 Incomplete
               </span>

@@ -1,6 +1,7 @@
 import ButtonProps from "./ButtonProps";
 import ContentProps from "./ContentProps";
 import DialogProps from "./DialogProps";
+import DropdownProps from "./DropdownProps";
 import IpData from "./IpData";
 import IpDataResponse from "./IpDataResponse";
 import LayoutProps from "./LayoutProps";
@@ -16,6 +17,7 @@ export type {
   ButtonProps,
   ContentProps,
   DialogProps,
+  DropdownProps,
   IpData,
   IpDataResponse,
   LayoutProps,

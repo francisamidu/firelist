@@ -24,13 +24,13 @@ const MakeTodo = ({
     createdDate: new Date(),
     description: "",
     done: false,
-    id: "",
+    id: Date.now().toString(),
     title: "",
   });
   const [error, setError] = useState("");
 
   const handleSubmit = () => {
-    if (todo) {
+    if (todo?.description || todo?.title) {
       const newTodos = todos.map((t) => {
         if (t.id === todo.id) {
           t = {
@@ -42,7 +42,7 @@ const MakeTodo = ({
       setTodos(newTodos);
       return;
     }
-    const tempTodos = [...todos, todoItem];
+    const tempTodos = [todoItem, ...todos];
     setTodos(tempTodos);
   };
   const resetTodoItem = () => {
@@ -60,10 +60,6 @@ const MakeTodo = ({
     resetTodo();
   };
   const handleOpen = () => {
-    setTodoItem({
-      ...todoItem,
-      id: Date.now().toString(),
-    });
     const notFilled = !todoItem.title || !todoItem.description;
 
     if (notFilled) {

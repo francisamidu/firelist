@@ -88,8 +88,11 @@ const Todos = () => {
   //Refs
   const addBtnRef: MutableRefObject<any> = useRef();
 
+  //Handlers
   const handleAddClick = () => setOpen(!open);
-  const handleDropdownClick = () => {};
+  const handleDropdownClick = (option: string) => {
+    console.log(option);
+  };
   const handleTodoClick = (id: string) => {
     const todoIndex = todos.findIndex((t) => t.id === id);
     if (todos[todoIndex]) {
