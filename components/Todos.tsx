@@ -84,7 +84,12 @@ const Todos = () => {
   }, [todos]);
   return (
     <div className="px-3 max-h-[100vh] overflow-y-auto">
-      <MakeTodo open={open} setOpen={setOpen} />
+      <MakeTodo
+        open={open}
+        setOpen={setOpen}
+        todos={todos}
+        setTodos={setTodos}
+      />
       <div className="flex flex-row items-center justify-between">
         <h1 className="my-2 font-bold text-blue-gray-800">Todos</h1>
         <div className="flex flex-row items-center">

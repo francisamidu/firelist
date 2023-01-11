@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useRef } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import {
   Dialog,
   DialogBody,
@@ -9,15 +9,55 @@ import {
 import { Calendar } from "lucide-react";
 import { Button } from ".";
 import { useClickOutside } from "../hooks";
-import { DialogProps } from "../types";
+import { DialogProps, Todo } from "../types";
 
-const MakeTodo = ({ open, setOpen, todo }: DialogProps) => {
+const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
   const dialogRef: MutableRefObject<any> = useRef();
-  const handleOpen = () => setOpen(!open);
+  const [todoItem, setTodoItem] = useState<Todo>({
+    createdDate: new Date(),
+    description: "",
+    done: false,
+    id: "",
+    title: "",
+  });
+  const [error, setError] = useState("");
+
+  const handleSubmit = () => {
+    if (todo) {
+      const newTodos = todos.map((t) => {
+        if (t.id === todo.id) {
+          t = {
+            ...todoItem,
+          };
+        }
+        return t;
+      });
+      setTodos(newTodos);
+      return;
+    }
+    const tempTodos = [...todos, todoItem];
+    setTodos(tempTodos);
+  };
+  const handleOpen = () => {
+    const notFilled = Object.values(todoItem).some((el) => el === "");
+    if (!notFilled) {
+      setError("Please fill all required fiels");
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    } else {
+      setOpen(!open);
+      handleSubmit();
+    }
+  };
   const handleClick = () => {
     setOpen(false);
   };
   useClickOutside(dialogRef, handleClick);
+
+  useEffect(() => {
+    if (todo) setTodoItem(todo);
+  }, [todo]);
 
   return (
     <>
@@ -32,12 +72,26 @@ const MakeTodo = ({ open, setOpen, todo }: DialogProps) => {
         </p>
         <DialogBody>
           <Input
-            className="text-blue-gray-700 mb-2 border-b border-[1px] border-blue-gray-50 focus:border-blue-gray-50 focus:outline-none"
+            className="text-blue-gray-700 mb-2 border-b border-[1px] border-blue-gray-50 focus:!border-blue-gray-50 focus:outline-none"
+            onChange={(event) =>
+              setTodoItem({
+                ...todoItem,
+                title: event.target.value,
+              })
+            }
             placeholder="Task title here...."
+            value={todoItem.title}
           />
           <Textarea
             className="text-blue-gray-700 mt-2 border-b border-[1px] border-blue-gray-50 focus:border-blue-gray-50 focus:outline-none"
+            onChange={(event) =>
+              setTodoItem({
+                ...todoItem,
+                description: event.target.value,
+              })
+            }
             placeholder="Task Description"
+            value={todoItem.description}
           />
         </DialogBody>
         <DialogFooter className="flex flex-row items-center justify-between">
@@ -55,6 +109,11 @@ const MakeTodo = ({ open, setOpen, todo }: DialogProps) => {
             />
             <Button className="" onClick={handleOpen} text="Confirm" />
           </div>
+          {error ? (
+            <div>
+              <span className="text-burgundy-500">{error}</span>
+            </div>
+          ) : null}
         </DialogFooter>
       </Dialog>
     </>
