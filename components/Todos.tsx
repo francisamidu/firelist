@@ -2,75 +2,13 @@ import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
 import { Todo as ITodo } from "../types";
 import { Dropdown, MakeTodo, Todo } from ".";
+import { useTodos } from "../contexts/TodosProvider";
 
 const Todos = () => {
+  const { setTodos, todos } = useTodos();
+
   //State variables
-  const [todos, setTodos] = useState<ITodo[]>([
-    {
-      id: "1",
-      done: false,
-      description:
-        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
-      title: "Finish this project",
-      createdDate: new Date(),
-    },
-    {
-      id: "2",
-      done: false,
-      description:
-        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
-      title: "Finish Ytb Downloader project",
-      createdDate: new Date(),
-    },
-    {
-      id: "7",
-      description:
-        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
-      done: false,
-      title: "Finish MealAssistant project",
-      createdDate: new Date(),
-    },
-    {
-      id: "8",
-      description:
-        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
-      done: false,
-      title: "Finish Task project",
-      createdDate: new Date(),
-    },
-    {
-      id: "9",
-      description:
-        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
-      done: false,
-      title: "Learn Svelte for real",
-      createdDate: new Date(),
-    },
-    {
-      id: "4",
-      description:
-        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
-      done: true,
-      title: "Revamp your portfolio",
-      createdDate: new Date(),
-    },
-    {
-      id: "5",
-      description:
-        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
-      done: true,
-      title: "Create a twitter account",
-      createdDate: new Date(),
-    },
-    {
-      id: "6",
-      description:
-        "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
-      done: true,
-      title: "Reach 10 commits in the first 8 days of 2023",
-      createdDate: new Date(),
-    },
-  ]);
+  const [todoItems, setTodoItems] = useState<ITodo[]>([]);
   const [completed, setCompleted] = useState<ITodo[]>([]);
   const [todoStat, setTodoStat] = useState({
     todos: 0,
@@ -91,7 +29,25 @@ const Todos = () => {
   //Handlers
   const handleAddClick = () => setOpen(!open);
   const handleDropdownClick = (option: string) => {
-    console.log(option);
+    switch (option) {
+      case "filter-completed": {
+        let temp1 = todos.filter((t) => t.done === true);
+        setTodoItems(temp1);
+        break;
+      }
+      case "filter-incomplete": {
+        let temp1 = todos.filter((t) => t.done !== true);
+        setTodoItems(temp1);
+        break;
+      }
+      case "sort-date-asc": {
+      }
+      case "sort-date-desc": {
+      }
+      default: {
+        break;
+      }
+    }
   };
   const handleTodoClick = (id: string) => {
     const todoIndex = todos.findIndex((t) => t.id === id);
@@ -109,19 +65,22 @@ const Todos = () => {
       title: "",
     });
   };
+
   useEffect(() => {
+    setTodoItems(todos);
     setCompleted(todos.filter((t) => t.done === true));
     setTodoStat({
       todos: todos.length,
       completed: todos.filter((t) => t.done === true).length,
     });
   }, [todos]);
+
   return (
     <div className="px-3 max-h-[100vh] overflow-y-auto">
       <MakeTodo
         open={open}
         todo={todo}
-        todos={todos}
+        todos={todoItems}
         resetTodo={handleResetTodo}
         setOpen={setOpen}
         setTodos={setTodos}
@@ -147,13 +106,13 @@ const Todos = () => {
             Todos - {todoStat.todos}
           </h2>
 
-          {todos
+          {todoItems
             .filter((t) => !t.done)
             .map((todo) => (
               <Todo
                 todo={todo}
                 key={todo.id}
-                todos={todos}
+                todos={todoItems}
                 getTodo={handleTodoClick}
                 setTodos={setTodos}
               />
@@ -168,7 +127,7 @@ const Todos = () => {
             <Todo
               todo={todo}
               key={todo.id}
-              todos={todos}
+              todos={todoItems}
               getTodo={handleTodoClick}
               setTodos={setTodos}
             />
