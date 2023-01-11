@@ -22,6 +22,7 @@ const Todos = () => {
     id: "",
     title: "",
   });
+  const [filterOption, setFilterOption] = useState("filter-all");
 
   //Refs
   const addBtnRef: MutableRefObject<any> = useRef();
@@ -29,6 +30,9 @@ const Todos = () => {
   //Handlers
   const handleAddClick = () => setOpen(!open);
   const handleDropdownClick = (option: string) => {
+    if (option.includes("filter")) {
+      setFilterOption(option);
+    }
     switch (option) {
       case "filter-completed": {
         let temp1 = todos.filter((t) => t.done === true);
@@ -36,8 +40,8 @@ const Todos = () => {
         break;
       }
       case "filter-incomplete": {
-        let temp1 = todos.filter((t) => t.done !== true);
-        setTodoItems(temp1);
+        let temp2 = todos.filter((t) => t.done !== true);
+        setTodoItems(temp2);
         break;
       }
       case "sort-date-asc": {
@@ -45,6 +49,7 @@ const Todos = () => {
       case "sort-date-desc": {
       }
       default: {
+        setTodoItems(todos);
         break;
       }
     }
@@ -101,14 +106,34 @@ const Todos = () => {
         <span className="text-blue-gray-600">Add Todo</span>
       </div>
       <div>
-        <div className="todos-container">
-          <h2 className="my-4 font-bold text-blue-gray-800">
-            Todos - {todoStat.todos}
-          </h2>
+        {filterOption === "filter-incomplete" ||
+        filterOption === "filter-all" ? (
+          <div className="todos-container">
+            <h2 className="my-4 font-bold text-blue-gray-800">
+              Todos - {todoStat.todos}
+            </h2>
 
-          {todoItems
-            .filter((t) => !t.done)
-            .map((todo) => (
+            {todoItems
+              .filter((t) => !t.done)
+              .map((todo) => (
+                <Todo
+                  todo={todo}
+                  key={todo.id}
+                  todos={todoItems}
+                  getTodo={handleTodoClick}
+                  setTodos={setTodos}
+                />
+              ))}
+          </div>
+        ) : null}
+        {filterOption === "filter-completed" ||
+        filterOption === "filter-all" ? (
+          <div className="todos-container">
+            <h2 className="my-4 font-bold text-blue-gray-800">
+              Completed - {todoStat.completed}
+            </h2>
+
+            {completed.map((todo) => (
               <Todo
                 todo={todo}
                 key={todo.id}
@@ -117,22 +142,8 @@ const Todos = () => {
                 setTodos={setTodos}
               />
             ))}
-        </div>
-        <div className="todos-container">
-          <h2 className="my-4 font-bold text-blue-gray-800">
-            Completed - {todoStat.completed}
-          </h2>
-
-          {completed.map((todo) => (
-            <Todo
-              todo={todo}
-              key={todo.id}
-              todos={todoItems}
-              getTodo={handleTodoClick}
-              setTodos={setTodos}
-            />
-          ))}
-        </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

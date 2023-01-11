@@ -1,10 +1,40 @@
-import React, { MouseEvent, MutableRefObject, useRef } from "react";
+import React, { MouseEvent, MutableRefObject, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { useClickOutside } from "../hooks";
 import { DropdownProps } from "../types";
 
 const Dropdown = ({ label, handler }: DropdownProps) => {
   const dropdownRef: MutableRefObject<any> = useRef();
+
+  //State variables
+  const [filterOptions, setFilterOptions] = useState([
+    {
+      name: "All",
+      value: "filter-all",
+    },
+    {
+      name: "Complete",
+      value: "filter-completed",
+    },
+    {
+      name: "Incomplete",
+      value: "filter-incomplete",
+    },
+  ]);
+  const [sortOptions, setSortOptions] = useState([
+    {
+      name: "Date (All)",
+      value: "sort-date-all",
+    },
+    {
+      name: "Date (Asc)",
+      value: "sort-date-asc",
+    },
+    {
+      name: "Date (Desc)",
+      value: "sort-date-desc",
+    },
+  ]);
 
   //Click handler functions
   const hide = () => {
@@ -47,37 +77,29 @@ const Dropdown = ({ label, handler }: DropdownProps) => {
         <div>
           {label === "Sort" ? (
             <div className="flex flex-col">
-              <span
-                data-value="sort-date-asc"
-                className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
-                onClick={(event) => handleOptionClick(event)}
-              >
-                Date (Asc)
-              </span>
-              <span
-                data-value="sort-date-desc"
-                className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
-                onClick={(event) => handleOptionClick(event)}
-              >
-                Date (Desc)
-              </span>
+              {sortOptions.map(({ name, value }, index) => (
+                <span
+                  data-value={value}
+                  key={index}
+                  className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
+                  onClick={(event) => handleOptionClick(event)}
+                >
+                  {name}
+                </span>
+              ))}
             </div>
           ) : (
             <div className="flex flex-col">
-              <span
-                data-value="filter-completed"
-                className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
-                onClick={(event) => handleOptionClick(event)}
-              >
-                Completed
-              </span>
-              <span
-                data-value="filter-incomplete"
-                className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
-                onClick={(event) => handleOptionClick(event)}
-              >
-                Incomplete
-              </span>
+              {filterOptions.map(({ name, value }, index) => (
+                <span
+                  data-value={value}
+                  key={index}
+                  className="p-2 hover:cursor-pointer hover:bg-blue-gray-50 transition-all duration-200 text-blue-gray-600"
+                  onClick={(event) => handleOptionClick(event)}
+                >
+                  {name}
+                </span>
+              ))}
             </div>
           )}
         </div>
