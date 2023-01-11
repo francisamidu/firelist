@@ -40,7 +40,7 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
   };
   const handleOpen = () => {
     const notFilled = Object.values(todoItem).some((el) => el === "");
-    if (!notFilled) {
+    if (notFilled) {
       setError("Please fill all required fiels");
       setTimeout(() => {
         setError("");
@@ -72,7 +72,7 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
         </p>
         <DialogBody>
           <Input
-            className="text-blue-gray-700 mb-2 border-b border-[1px] border-blue-gray-50 focus:!border-blue-gray-50 focus:outline-none"
+            className="text-blue-gray-700 mb-2.5 placeholder-show:!border-none !border-[1px] !border-blue-gray-50 focus:!border-blue-gray-50 focus:outline-none"
             onChange={(event) =>
               setTodoItem({
                 ...todoItem,
@@ -83,7 +83,7 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
             value={todoItem.title}
           />
           <Textarea
-            className="text-blue-gray-700 mt-2 border-b border-[1px] border-blue-gray-50 focus:border-blue-gray-50 focus:outline-none"
+            className="text-blue-gray-700 mt-2.5 !border-[1px] !border-blue-gray-50 focus:border-blue-gray-50 focus:outline-none placeholder-show:!border-none"
             onChange={(event) =>
               setTodoItem({
                 ...todoItem,
@@ -93,27 +93,31 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
             placeholder="Task Description"
             value={todoItem.description}
           />
+          {error ? (
+            <div className="my-2">
+              <span className="text-burgundy-500">{error}</span>
+            </div>
+          ) : null}
         </DialogBody>
         <DialogFooter className="flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center py-1 px-3 rounded-xl border-[1px] border-blue-gray-50">
+          <div className="flex flex-row items-center py-2 px-3 rounded-xl border-[1px] border-blue-gray-50 hover:cursor-pointer">
             <Calendar className="text-blue-gray-300" size={16} />
-            <span className="text-md font-bold ml-2 text-blue-gray-300">
+            <span className="text-sm font-medium ml-2 text-blue-gray-300">
               Due Date
             </span>
           </div>
           <div className="flex flex-row items-center">
             <Button
-              className="!bg-white !ring-0 !shadow-none !border-[1px] !border-blue-gray-50 mr-2 !text-blue-gray-700"
+              className="!bg-white !ring-0 hover:!shadow-none !border-[1px] !border-blue-gray-50 mr-2 !text-blue-gray-700 py-2.5 hover:!bg-blue-gray-700 hover:!text-white transition-all duration-300"
               onClick={handleOpen}
               text="Cancel"
             />
-            <Button className="" onClick={handleOpen} text="Confirm" />
+            <Button
+              className="py-2.5 hover:!shadow-none hover:!text-midnight-500 hover:!bg-white"
+              onClick={handleOpen}
+              text="Confirm"
+            />
           </div>
-          {error ? (
-            <div>
-              <span className="text-burgundy-500">{error}</span>
-            </div>
-          ) : null}
         </DialogFooter>
       </Dialog>
     </>
