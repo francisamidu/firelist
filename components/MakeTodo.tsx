@@ -72,8 +72,8 @@ const MakeTodo = ({
         setError("");
       }, 5000);
     } else {
-      handleClick();
       handleSubmit();
+      handleClick();
     }
   };
   useClickOutside(dialogRef, handleClick);
@@ -138,7 +138,7 @@ const MakeTodo = ({
             <Button
               className="py-2.5 hover:!shadow-none border-[1px] border-midnight-500 hover:!text-midnight-500 hover:!bg-white"
               onClick={handleOpen}
-              text={todo ? "Update" : "Create"}
+              text={todo?.title || todo?.description ? "Update" : "Create"}
             />
           </div>
         </DialogFooter>
