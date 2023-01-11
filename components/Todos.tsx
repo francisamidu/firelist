@@ -45,14 +45,25 @@ const Todos = () => {
         break;
       }
       case "sort-date-asc": {
+        const temp3 = todos.sort((a, b) => {
+          return a.createdDate.getTime() > b.createdDate.getTime() ? 1 : -1;
+        });
+        setTodoItems(temp3);
+        break;
       }
       case "sort-date-desc": {
+        const temp4 = todos.sort((a, b) => {
+          return a.createdDate.getTime() < b.createdDate.getTime() ? 1 : -1;
+        });
+        setTodoItems(temp4);
+        break;
       }
       default: {
         setTodoItems(todos);
         break;
       }
     }
+    console.log(todoItems);
   };
   const handleTodoClick = (id: string) => {
     const todoIndex = todos.findIndex((t) => t.id === id);
