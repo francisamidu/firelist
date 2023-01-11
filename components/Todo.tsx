@@ -1,17 +1,13 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { Todo as ITodo } from "../types";
+import { Todo as ITodo, TodoProps } from "../types";
 import { CheckCircle2, Calendar } from "lucide-react";
 import { Checkbox } from "@material-tailwind/react";
 import { formatDateVar } from "../utils";
 
-type TodoProps = {
-  todo: ITodo;
-  todos: ITodo[];
-  setTodos: Dispatch<SetStateAction<ITodo[]>>;
-};
 const Todo = ({
   todo: { done, id, title, description, createdDate },
   todos,
+  getTodo,
   setTodos,
 }: TodoProps) => {
   const handleClick = () => {
@@ -24,7 +20,7 @@ const Todo = ({
     setTodos(newTodos);
   };
   return (
-    <>
+    <div onClick={() => getTodo(id)}>
       {done ? (
         <div className="bg-white rounded-md my-1 p-5 flex flex-row items-start hover:cursor-pointer">
           <CheckCircle2
@@ -65,7 +61,7 @@ const Todo = ({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

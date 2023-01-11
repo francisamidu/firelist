@@ -11,7 +11,14 @@ import { Button } from ".";
 import { useClickOutside } from "../hooks";
 import { DialogProps, Todo } from "../types";
 
-const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
+const MakeTodo = ({
+  open,
+  setOpen,
+  setTodos,
+  resetTodo,
+  todo,
+  todos,
+}: DialogProps) => {
   const dialogRef: MutableRefObject<any> = useRef();
   const [todoItem, setTodoItem] = useState<Todo>({
     createdDate: new Date(),
@@ -38,7 +45,7 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
     const tempTodos = [...todos, todoItem];
     setTodos(tempTodos);
   };
-  const resetTodo = () => {
+  const resetTodoItem = () => {
     setTodoItem({
       createdDate: new Date(),
       description: "",
@@ -49,6 +56,7 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
   };
   const handleClick = () => {
     setOpen(false);
+    resetTodoItem();
     resetTodo();
   };
   const handleOpen = () => {
@@ -71,7 +79,7 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
   useClickOutside(dialogRef, handleClick);
 
   useEffect(() => {
-    if (todo) setTodoItem(todo);
+    if (todo) setTodoItem({ ...todo });
   }, [todo]);
 
   return (
@@ -130,7 +138,7 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
             <Button
               className="py-2.5 hover:!shadow-none border-[1px] border-midnight-500 hover:!text-midnight-500 hover:!bg-white"
               onClick={handleOpen}
-              text="Confirm"
+              text={todo ? "Update" : "Create"}
             />
           </div>
         </DialogFooter>

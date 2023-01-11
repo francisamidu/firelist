@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
 import { Todo as ITodo } from "../types";
 import { Dropdown, MakeTodo, Todo } from ".";
 
 const Todos = () => {
+  //State variables
   const [todos, setTodos] = useState<ITodo[]>([
     {
       id: "1",
@@ -76,9 +77,35 @@ const Todos = () => {
     completed: 0,
   });
   const [open, setOpen] = useState(false);
+  const [todo, setTodo] = useState<ITodo>({
+    createdDate: new Date(),
+    description: "",
+    done: false,
+    id: "",
+    title: "",
+  });
+
+  //Refs
+  const addBtnRef: MutableRefObject<any> = useRef();
 
   const handleAddClick = () => setOpen(!open);
   const handleDropdownClick = () => {};
+  const handleTodoClick = (id: string) => {
+    const todoIndex = todos.findIndex((t) => t.id === id);
+    if (todos[todoIndex]) {
+      setTodo(todos[todoIndex]);
+      addBtnRef?.current.click();
+    }
+  };
+  const handleResetTodo = () => {
+    setTodo({
+      createdDate: new Date(),
+      description: "",
+      done: false,
+      id: "",
+      title: "",
+    });
+  };
   useEffect(() => {
     setCompleted(todos.filter((t) => t.done === true));
     setTodoStat({
@@ -90,8 +117,10 @@ const Todos = () => {
     <div className="px-3 max-h-[100vh] overflow-y-auto">
       <MakeTodo
         open={open}
-        setOpen={setOpen}
+        todo={todo}
         todos={todos}
+        resetTodo={handleResetTodo}
+        setOpen={setOpen}
         setTodos={setTodos}
       />
       <div className="flex flex-row items-center justify-between">
@@ -103,6 +132,7 @@ const Todos = () => {
       </div>
       <div
         className="mt-5 flex flex-row items-center hover:cursor-pointer py-2 w-max"
+        ref={addBtnRef}
         onClick={handleAddClick}
       >
         <Plus className="text-midnight-300 mr-3" size={18} />
@@ -121,6 +151,7 @@ const Todos = () => {
                 todo={todo}
                 key={todo.id}
                 todos={todos}
+                getTodo={handleTodoClick}
                 setTodos={setTodos}
               />
             ))}
@@ -131,7 +162,13 @@ const Todos = () => {
           </h2>
 
           {completed.map((todo) => (
-            <Todo todo={todo} key={todo.id} todos={todos} setTodos={setTodos} />
+            <Todo
+              todo={todo}
+              key={todo.id}
+              todos={todos}
+              getTodo={handleTodoClick}
+              setTodos={setTodos}
+            />
           ))}
         </div>
       </div>
