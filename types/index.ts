@@ -10,6 +10,7 @@ import SidebarProps from "./SidebarProps";
 import Status from "./Status";
 import Tab from "./Tab";
 import Todo from "./Todo";
+import TodoProps from "./TodoProps";
 
 export type {
   ButtonProps,
@@ -21,6 +22,7 @@ export type {
   NavProps,
   Tab,
   Todo,
+  TodoProps,
   Result,
   Status,
   SidebarProps,

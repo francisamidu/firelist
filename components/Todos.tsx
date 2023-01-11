@@ -72,8 +72,8 @@ const Todos = () => {
   ]);
   const [completed, setCompleted] = useState<ITodo[]>([]);
   const [todoStat, setTodoStat] = useState({
-    todos: todos.length,
-    completed: todos.filter((t) => t.done === true).length,
+    todos: 0,
+    completed: 0,
   });
   const [open, setOpen] = useState(false);
 
@@ -81,6 +81,10 @@ const Todos = () => {
   const handleDropdownClick = () => {};
   useEffect(() => {
     setCompleted(todos.filter((t) => t.done === true));
+    setTodoStat({
+      todos: todos.length,
+      completed: todos.filter((t) => t.done === true).length,
+    });
   }, [todos]);
   return (
     <div className="px-3 max-h-[100vh] overflow-y-auto">

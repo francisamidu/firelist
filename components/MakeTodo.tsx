@@ -38,20 +38,35 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
     const tempTodos = [...todos, todoItem];
     setTodos(tempTodos);
   };
+  const resetTodo = () => {
+    setTodoItem({
+      createdDate: new Date(),
+      description: "",
+      done: false,
+      id: "",
+      title: "",
+    });
+  };
+  const handleClick = () => {
+    setOpen(false);
+    resetTodo();
+  };
   const handleOpen = () => {
-    const notFilled = Object.values(todoItem).some((el) => el === "");
+    setTodoItem({
+      ...todoItem,
+      id: Date.now().toString(),
+    });
+    const notFilled = !todoItem.title || !todoItem.description;
+
     if (notFilled) {
       setError("Please fill all required fiels");
       setTimeout(() => {
         setError("");
       }, 5000);
     } else {
-      setOpen(!open);
+      handleClick();
       handleSubmit();
     }
-  };
-  const handleClick = () => {
-    setOpen(false);
   };
   useClickOutside(dialogRef, handleClick);
 
@@ -109,11 +124,11 @@ const MakeTodo = ({ open, setOpen, setTodos, todo, todos }: DialogProps) => {
           <div className="flex flex-row items-center">
             <Button
               className="!bg-white !ring-0 hover:!shadow-none !border-[1px] !border-blue-gray-50 mr-2 !text-blue-gray-700 py-2.5 hover:!bg-blue-gray-700 hover:!text-white transition-all duration-300"
-              onClick={handleOpen}
+              onClick={handleClick}
               text="Cancel"
             />
             <Button
-              className="py-2.5 hover:!shadow-none hover:!text-midnight-500 hover:!bg-white"
+              className="py-2.5 hover:!shadow-none border-[1px] border-midnight-500 hover:!text-midnight-500 hover:!bg-white"
               onClick={handleOpen}
               text="Confirm"
             />
