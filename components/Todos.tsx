@@ -98,11 +98,11 @@ const Todos = () => {
         </div>
       </div>
       <div
-        className="mt-5 flex flex-row items-center hover:cursor-pointer py-2 w-max"
+        className="mt-5 flex flex-row items-center hover:cursor-pointer py-2 px-3 w-max bg-white rounded-md"
         ref={addBtnRef}
         onClick={handleAddClick}
       >
-        <Plus className="text-midnight-300 mr-3" size={18} />
+        <Plus className="text-blue-gray-600 mr-2" size={18} />
         <span className="text-blue-gray-600">Add Todo</span>
       </div>
       <div>
