@@ -2,7 +2,14 @@
 import * as firebase from "firebase/app";
 import { browserSessionPersistence, getAuth } from "firebase/auth";
 import { getApps } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import {
+  remove,
+  getDatabase,
+  onValue,
+  push,
+  ref,
+  update,
+} from "firebase/database";
 import getConfig from "next/config";
 
 const apps = getApps();
@@ -28,8 +35,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore();
+const db = getDatabase(app);
 if (typeof window !== "undefined" && !apps.length) {
   auth.setPersistence(browserSessionPersistence);
 }
-export { app, auth, db };
+export { app, auth, db, onValue, push, ref, remove, update };

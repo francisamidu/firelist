@@ -2,7 +2,7 @@ import React from "react";
 import { TodoProps } from "../types";
 import { CheckCircle2, Calendar, Trash } from "lucide-react";
 import { Checkbox } from "@material-tailwind/react";
-import { formatDateVar } from "../utils";
+import { db, formatDateVar, ref, update } from "../utils";
 
 const Todo = ({
   todo: { done, id, title, description, createdDate },
@@ -11,14 +11,19 @@ const Todo = ({
   removeTodo,
   setTodos,
 }: TodoProps) => {
-  const handleClick = () => {
-    const newTodos = todos.map((t) => {
-      if (t.id === id) {
-        t.done = !t.done;
-      }
-      return t;
-    });
-    setTodos(newTodos);
+  const handleClick = (id: string) => {
+    const todoRef = ref(db, "/todos/" + id);
+    update(todoRef, { done: !done })
+      .then(() => {
+        const newTodos = todos.map((t) => {
+          if (t.id === id) {
+            t.done = !t.done;
+          }
+          return t;
+        });
+        setTodos(newTodos);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div>
@@ -26,7 +31,7 @@ const Todo = ({
         <div className="bg-white rounded-md my-1 p-5 flex flex-row items-start relative">
           <CheckCircle2
             className="hover:cursor-pointer text-midnight-300"
-            onClick={() => handleClick()}
+            onClick={() => handleClick(id)}
             checked
           />
           <div className="flex flex-col ml-3">
@@ -54,7 +59,7 @@ const Todo = ({
         <div className="bg-white rounded-md my-1 px-3 py-2 flex flex-row items-start relative">
           <Checkbox
             className="border-midnight-300 focus:ring-0 hover:right-0 !p-0 rounded-full border-2"
-            onClick={() => handleClick()}
+            onClick={() => handleClick(id)}
           />
           <div className="flex flex-col ml-3">
             <p className="flex flex-col" onClick={() => getTodo(id)}>

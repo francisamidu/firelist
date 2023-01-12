@@ -10,6 +10,7 @@ import { Calendar } from "lucide-react";
 import { Button } from ".";
 import { useClickOutside } from "../hooks";
 import { DialogProps, Todo } from "../types";
+import { db, push, ref, update } from "../utils";
 
 const MakeTodo = ({
   open,
@@ -30,20 +31,26 @@ const MakeTodo = ({
   const [error, setError] = useState("");
 
   const handleSubmit = () => {
-    if (todo?.description || todo?.title) {
-      const newTodos = todos.map((t) => {
-        if (t.id === todo.id) {
-          t = {
-            ...todoItem,
-          };
-        }
-        return t;
-      });
-      setTodos(newTodos);
-      return;
+    if (todo?.title) {
+      const todoRef = ref(db, "/todos/" + todo.id);
+      update(todoRef, {
+        done: todo.done,
+        description: todoItem.description,
+        title: todoItem.title,
+      })
+        .then(() => {})
+        .catch((error) => console.log(error));
+    } else {
+      if (todo?.description || todo?.title) {
+        const todoRef = ref(db, "/todos");
+        push(todoRef, todoItem)
+          .then(() => {
+            const tempTodos = [todoItem, ...todos];
+            setTodos(tempTodos);
+          })
+          .catch((error) => console.log(error));
+      }
     }
-    const tempTodos = [todoItem, ...todos];
-    setTodos(tempTodos);
   };
   const resetTodoItem = () => {
     setTodoItem({

@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 import { Todo as ITodo } from "../types";
 import { Dropdown, MakeTodo, NoContentCta, Todo } from ".";
 import { useTodos } from "../contexts/TodosProvider";
+import { ref, db, remove } from "../utils";
 
 const Todos = () => {
   const { setTodos, todos } = useTodos();
@@ -81,8 +82,13 @@ const Todos = () => {
     });
   };
   const handleRemoveTodo = (id: string) => {
-    const newTodos = todos.filter((t) => t.id !== id);
-    setTodos(newTodos);
+    const todoRef = ref(db, "/todos/" + id);
+    remove(todoRef)
+      .then(() => {
+        const newTodos = todos.filter((t) => t.id !== id);
+        setTodos(newTodos);
+      })
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { app, auth, db } from "./firebase";
+import { app, auth, db, onValue, push, ref, remove, update } from "./firebase";
 import {
   formatDate,
   formatDateVar,
@@ -17,7 +17,12 @@ export {
   formatDateVar,
   formatTime,
   formatTimeRelative,
+  onValue,
+  push,
+  ref,
+  remove,
   sendPasswordResetCode,
   signin,
   signup,
+  update,
 };
