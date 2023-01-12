@@ -44,14 +44,14 @@ const Todo = ({
             </div>
           </div>
           <div
-            className="hover:cursor-pointer top-2 left-2 p-2 rounded-md border-[1px] border-blue-gray-50"
+            className="hover:cursor-pointer absolute top-2 right-3 p-2 rounded-md border-[1px] border-blue-gray-50"
             onClick={() => removeTodo(id)}
           >
             <Trash className="text-blue-gray-500" size={17} />
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-md my-1 px-3 py-2 flex flex-row items-start">
+        <div className="bg-white rounded-md my-1 px-3 py-2 flex flex-row items-start relative">
           <Checkbox
             className="border-midnight-300 focus:ring-0 hover:right-0 !p-0 rounded-full border-2"
             onClick={() => handleClick()}
@@ -71,7 +71,7 @@ const Todo = ({
             </div>
           </div>
           <div
-            className="hover:cursor-pointer top-2 left-2 p-2 rounded-md border-[1px] border-blue-gray-50"
+            className="hover:cursor-pointer absolute top-2 right-3 p-2 rounded-md border-[1px] border-blue-gray-50"
             onClick={() => removeTodo(id)}
           >
             <Trash className="text-blue-gray-500" size={17} />
