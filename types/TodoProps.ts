@@ -6,5 +6,6 @@ type TodoProps = {
   todos: Todo[];
   setTodos: Dispatch<SetStateAction<Todo[]>>;
   getTodo: (id: string) => void;
+  removeTodo: (id: string) => void;
 };
 export default TodoProps;

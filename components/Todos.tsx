@@ -80,6 +80,10 @@ const Todos = () => {
       title: "",
     });
   };
+  const handleRemoveTodo = (id: string) => {
+    const newTodos = todos.filter((t) => t.id === id);
+    setTodos(newTodos);
+  };
 
   useEffect(() => {
     setTodoItems(todos);
@@ -111,7 +115,7 @@ const Todos = () => {
       <div className="flex flex-row items-center justify-between">
         <h1 className="my-2 font-bold text-blue-gray-800">Todos</h1>
         <div className="flex flex-row items-center">
-          <Dropdown label="Sort" handler={handleDropdownClick} />
+          {/* <Dropdown label="Sort" handler={handleDropdownClick} /> */}
           <Dropdown label="Filter" handler={handleDropdownClick} />
         </div>
       </div>
@@ -139,6 +143,7 @@ const Todos = () => {
                   key={todo.id}
                   todos={todoItems}
                   getTodo={handleTodoClick}
+                  removeTodo={handleRemoveTodo}
                   setTodos={setTodos}
                 />
               ))}
@@ -157,6 +162,7 @@ const Todos = () => {
                 key={todo.id}
                 todos={todoItems}
                 getTodo={handleTodoClick}
+                removeTodo={handleRemoveTodo}
                 setTodos={setTodos}
               />
             ))}
