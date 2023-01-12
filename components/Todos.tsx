@@ -94,14 +94,6 @@ const Todos = () => {
     });
   }, [todos]);
 
-  useEffect(() => {
-    setCompleted(todos.filter((t) => t.done === true));
-    setTodoStat({
-      todos: todos.length,
-      completed: todos.filter((t) => t.done === true).length,
-    });
-  }, [todoItems]);
-
   return (
     <div className="px-3 max-h-[100vh] overflow-y-auto">
       <MakeTodo
