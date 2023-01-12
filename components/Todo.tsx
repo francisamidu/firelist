@@ -1,6 +1,6 @@
 import React from "react";
-import { Todo as ITodo, TodoProps } from "../types";
-import { CheckCircle2, Calendar, Trash2Icon as Delete } from "lucide-react";
+import { TodoProps } from "../types";
+import { CheckCircle2, Calendar, Trash } from "lucide-react";
 import { Checkbox } from "@material-tailwind/react";
 import { formatDateVar } from "../utils";
 
@@ -21,7 +21,7 @@ const Todo = ({
     setTodos(newTodos);
   };
   return (
-    <div onClick={() => getTodo(id)}>
+    <div>
       {done ? (
         <div className="bg-white rounded-md my-1 p-5 flex flex-row items-start relative">
           <CheckCircle2
@@ -30,7 +30,7 @@ const Todo = ({
             checked
           />
           <div className="flex flex-col ml-3">
-            <p className="flex flex-col">
+            <p className="flex flex-col" onClick={() => getTodo(id)}>
               <span className="text-black line-through font-bold hover:cursor-pointer">
                 {title}
               </span>
@@ -45,9 +45,9 @@ const Todo = ({
           </div>
           <div
             className="hover:cursor-pointer top-2 left-2 p-2 rounded-md border-[1px] border-blue-gray-50"
-            onClickCapture={() => removeTodo(id)}
+            onClick={() => removeTodo(id)}
           >
-            <Delete className="text-blue-gray-500" size={17} />
+            <Trash className="text-blue-gray-500" size={17} />
           </div>
         </div>
       ) : (
@@ -57,7 +57,7 @@ const Todo = ({
             onClick={() => handleClick()}
           />
           <div className="flex flex-col ml-3">
-            <p className="flex flex-col">
+            <p className="flex flex-col" onClick={() => getTodo(id)}>
               <span className="text-black font-bold hover:cursor-pointer">
                 {title}
               </span>
@@ -72,9 +72,9 @@ const Todo = ({
           </div>
           <div
             className="hover:cursor-pointer top-2 left-2 p-2 rounded-md border-[1px] border-blue-gray-50"
-            onClickCapture={() => removeTodo(id)}
+            onClick={() => removeTodo(id)}
           >
-            <Delete className="text-blue-gray-500" size={17} />
+            <Trash className="text-blue-gray-500" size={17} />
           </div>
         </div>
       )}

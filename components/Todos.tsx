@@ -81,7 +81,7 @@ const Todos = () => {
     });
   };
   const handleRemoveTodo = (id: string) => {
-    const newTodos = todos.filter((t) => t.id === id);
+    const newTodos = todos.filter((t) => t.id !== id);
     setTodos(newTodos);
   };
 
