@@ -28,7 +28,7 @@ export const TodosProvider = ({
       description:
         "Esse eius voluptatum accusamus illo veniam odit nulla quo earum dolorem nemo.",
       title: "Finish this project",
-      createdDate: new Date("2023-01-01"),
+      createdDate: new Date("2023-01-12"),
     },
     {
       id: "2",

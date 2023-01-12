@@ -8,7 +8,7 @@ const Todos = () => {
   const { setTodos, todos } = useTodos();
 
   //State variables
-  const [todoItems, setTodoItems] = useState<ITodo[]>([]);
+  const [todoItems, setTodoItems] = useState<ITodo[]>(todos);
   const [completed, setCompleted] = useState<ITodo[]>([]);
   const [todoStat, setTodoStat] = useState({
     todos: 0,
@@ -48,14 +48,14 @@ const Todos = () => {
         const temp3 = todos.sort((a, b) => {
           return a.createdDate.getTime() > b.createdDate.getTime() ? 1 : -1;
         });
-        setTodoItems(temp3);
+        setTodoItems(() => temp3);
         break;
       }
       case "sort-date-desc": {
         const temp4 = todos.sort((a, b) => {
           return a.createdDate.getTime() < b.createdDate.getTime() ? 1 : -1;
         });
-        setTodoItems(temp4);
+        setTodoItems(() => temp4);
         break;
       }
       default: {
@@ -63,7 +63,6 @@ const Todos = () => {
         break;
       }
     }
-    console.log(todoItems);
   };
   const handleTodoClick = (id: string) => {
     const todoIndex = todos.findIndex((t) => t.id === id);
@@ -90,6 +89,14 @@ const Todos = () => {
       completed: todos.filter((t) => t.done === true).length,
     });
   }, [todos]);
+
+  useEffect(() => {
+    setCompleted(todos.filter((t) => t.done === true));
+    setTodoStat({
+      todos: todos.length,
+      completed: todos.filter((t) => t.done === true).length,
+    });
+  }, [todoItems]);
 
   return (
     <div className="px-3 max-h-[100vh] overflow-y-auto">
