@@ -6,6 +6,7 @@ import IpData from "./IpData";
 import IpDataResponse from "./IpDataResponse";
 import LayoutProps from "./LayoutProps";
 import NavProps from "./NavProps";
+import NoContentCtaProps from "./NoContentCtaProps";
 import Result from "./Result";
 import SidebarProps from "./SidebarProps";
 import Status from "./Status";
@@ -22,6 +23,7 @@ export type {
   IpDataResponse,
   LayoutProps,
   NavProps,
+  NoContentCtaProps,
   Tab,
   Todo,
   TodoProps,

@@ -1,7 +1,7 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
 import { Todo as ITodo } from "../types";
-import { Dropdown, MakeTodo, Todo } from ".";
+import { Dropdown, MakeTodo, NoContentCta, Todo } from ".";
 import { useTodos } from "../contexts/TodosProvider";
 
 const Todos = () => {
@@ -120,46 +120,52 @@ const Todos = () => {
         <span className="text-blue-gray-600">Add Todo</span>
       </div>
       <div>
-        {filterOption === "filter-incomplete" ||
-        filterOption === "filter-all" ? (
-          <div className="todos-container">
-            <h2 className="my-4 font-bold text-blue-gray-800">
-              Todos - {todoStat.todos}
-            </h2>
+        {todos.length > 0 ? (
+          <>
+            {filterOption === "filter-incomplete" ||
+            filterOption === "filter-all" ? (
+              <div className="todos-container">
+                <h2 className="my-4 font-bold text-blue-gray-800">
+                  Todos - {todoStat.todos}
+                </h2>
 
-            {todoItems
-              .filter((t) => !t.done)
-              .map((todo) => (
-                <Todo
-                  todo={todo}
-                  key={todo.id}
-                  todos={todoItems}
-                  getTodo={handleTodoClick}
-                  removeTodo={handleRemoveTodo}
-                  setTodos={setTodos}
-                />
-              ))}
-          </div>
-        ) : null}
-        {filterOption === "filter-completed" ||
-        filterOption === "filter-all" ? (
-          <div className="todos-container">
-            <h2 className="my-4 font-bold text-blue-gray-800">
-              Completed - {todoStat.completed}
-            </h2>
+                {todoItems
+                  .filter((t) => !t.done)
+                  .map((todo) => (
+                    <Todo
+                      todo={todo}
+                      key={todo.id}
+                      todos={todoItems}
+                      getTodo={handleTodoClick}
+                      removeTodo={handleRemoveTodo}
+                      setTodos={setTodos}
+                    />
+                  ))}
+              </div>
+            ) : null}
+            {filterOption === "filter-completed" ||
+            filterOption === "filter-all" ? (
+              <div className="todos-container">
+                <h2 className="my-4 font-bold text-blue-gray-800">
+                  Completed - {todoStat.completed}
+                </h2>
 
-            {completed.map((todo) => (
-              <Todo
-                todo={todo}
-                key={todo.id}
-                todos={todoItems}
-                getTodo={handleTodoClick}
-                removeTodo={handleRemoveTodo}
-                setTodos={setTodos}
-              />
-            ))}
-          </div>
-        ) : null}
+                {completed.map((todo) => (
+                  <Todo
+                    todo={todo}
+                    key={todo.id}
+                    todos={todoItems}
+                    getTodo={handleTodoClick}
+                    removeTodo={handleRemoveTodo}
+                    setTodos={setTodos}
+                  />
+                ))}
+              </div>
+            ) : null}
+          </>
+        ) : (
+          <NoContentCta addTodo={handleAddClick} />
+        )}
       </div>
     </div>
   );

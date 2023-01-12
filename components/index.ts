@@ -6,6 +6,7 @@ import Header from "./Header";
 import Layout from "./Layout";
 import MakeTodo from "./MakeTodo";
 import Navbar from "./Navbar";
+import NoContentCta from "./NoContentCta";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
 import Sidepanel from "./Sidepanel";
@@ -21,6 +22,7 @@ export {
   Layout,
   Navbar,
   MakeTodo,
+  NoContentCta,
   Profile,
   Sidebar,
   Sidepanel,
