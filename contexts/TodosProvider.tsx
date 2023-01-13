@@ -1,4 +1,4 @@
-import { ref, onValue } from "../utils";
+import { ref, onValue } from "firebase/database";
 import React, {
   createContext,
   useContext,
@@ -10,7 +10,7 @@ import React, {
   ReactNode,
 } from "react";
 import { Todo } from "../types";
-import { db } from "../utils";
+import { collection, db, getDocs } from "../utils";
 
 const TodosContext = createContext<{
   todos: Todo[];
@@ -25,18 +25,26 @@ export const TodosProvider = ({
 }: Partial<PropsWithChildren<ReactNode>>) => {
   const [todoList, setTodoList] = useState<Todo[]>([]);
 
-  useEffect(() => {
-    const todoRef = ref(db, "/todos");
+  const getTodos = async () => {
+    try {
+      const snapshot = await getDocs(collection(db, "todos"));
+      snapshot.forEach((doc) => {
+        const todo: any = {
+          id: doc.id,
+          ...doc.data(),
+          createdDate: new Date(doc.data()?.createdDate?.seconds * 1000),
+        };
+        setTodoList([...todoList, todo]);
+        console.log(todo);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    onValue(todoRef, (snapshot) => {
-      const todos = snapshot.val();
-      const newTodoList: Todo[] = [];
-      for (let id in todos) {
-        newTodoList.push({ id, ...todos[id] });
-      }
-      setTodoList(newTodoList);
-    });
-  }, [db]);
+  useEffect(() => {
+    getTodos();
+  }, []);
 
   return (
     <TodosContext.Provider

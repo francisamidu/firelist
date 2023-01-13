@@ -3,7 +3,7 @@ import { Plus } from "lucide-react";
 import { Todo as ITodo } from "../types";
 import { Dropdown, MakeTodo, NoContentCta, Todo } from ".";
 import { useTodos } from "../contexts/TodosProvider";
-import { ref, db, remove } from "../utils";
+import { db, collection, deleteDoc, getDoc, doc } from "../utils";
 
 const Todos = () => {
   const { setTodos, todos } = useTodos();
@@ -81,14 +81,14 @@ const Todos = () => {
       title: "",
     });
   };
-  const handleRemoveTodo = (id: string) => {
-    const todoRef = ref(db, "/todos/" + id);
-    remove(todoRef)
-      .then(() => {
-        const newTodos = todos.filter((t) => t.id !== id);
-        setTodos(newTodos);
-      })
-      .catch((error) => console.log(error));
+  const handleRemoveTodo = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, "todos", id));
+      const newTodos = todos.filter((t) => t.id !== id);
+      setTodos(newTodos);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

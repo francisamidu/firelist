@@ -2,7 +2,7 @@ import React from "react";
 import { TodoProps } from "../types";
 import { CheckCircle2, Calendar, Trash } from "lucide-react";
 import { Checkbox } from "@material-tailwind/react";
-import { db, formatDateVar, ref, update } from "../utils";
+import { collection, db, doc, formatDateVar, updateDoc } from "../utils";
 
 const Todo = ({
   todo: { done, id, title, description, createdDate },
@@ -11,19 +11,25 @@ const Todo = ({
   removeTodo,
   setTodos,
 }: TodoProps) => {
-  const handleClick = (id: string) => {
-    const todoRef = ref(db, "/todos/" + id);
-    update(todoRef, { done: !done })
-      .then(() => {
-        const newTodos = todos.map((t) => {
-          if (t.id === id) {
-            t.done = !t.done;
-          }
-          return t;
-        });
-        setTodos(newTodos);
-      })
-      .catch((error) => console.log(error));
+  const handleClick = async (id: string) => {
+    try {
+      const docRef = doc(db, "todos", id);
+      await updateDoc(docRef, {
+        done,
+      });
+      const newTodos = todos.map((t) => {
+        if (t.id === id) {
+          t = {
+            ...t,
+            done: !t.done,
+          };
+        }
+        return t;
+      });
+      setTodos(newTodos);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

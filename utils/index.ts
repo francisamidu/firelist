@@ -1,4 +1,16 @@
-import { app, auth, db, onValue, push, ref, remove, update } from "./firebase";
+import {
+  addDoc,
+  app,
+  auth,
+  collection,
+  db,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+} from "./firebase";
 import {
   formatDate,
   formatDateVar,
@@ -12,17 +24,20 @@ import { signup } from "./signup";
 export {
   app,
   auth,
+  addDoc,
   db,
+  deleteDoc,
+  doc,
+  collection,
+  getDoc,
+  getDocs,
   formatDate,
   formatDateVar,
   formatTime,
   formatTimeRelative,
-  onValue,
-  push,
-  ref,
-  remove,
   sendPasswordResetCode,
+  setDoc,
   signin,
   signup,
-  update,
+  updateDoc,
 };
