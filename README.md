@@ -9,9 +9,12 @@ This is a firebase-powered todo app that works
 - Editing a Todo
 - Deleting a Todo
 - Completing a Todo
+- Sorting todos by date
+- ~~Filtering todos~~
+- ~~Picking due date~~
 - ~~Searching, Sorting and Filtering~~
 - ~~Resetting password~~
-- ~~Creating a Profile~~
+- ~~Creating/Updating a Profile~~
 
 ## Technologies used
 
