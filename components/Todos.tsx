@@ -1,4 +1,10 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, {
+  MutableRefObject,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import { Plus } from "lucide-react";
 import { Todo as ITodo } from "../types";
 import { Dropdown, MakeTodo, NoContentCta, Todo } from ".";
@@ -16,13 +22,30 @@ const Todos = () => {
     completed: 0,
   });
   const [open, setOpen] = useState(false);
-  const [todo, setTodo] = useState<ITodo>({
-    createdDate: new Date(),
-    description: "",
-    done: false,
-    id: "",
-    title: "",
-  });
+  // const [todo, setTodo] = useState({
+  //   createdDate: new Date(),
+  //   description: "",
+  //   done: false,
+  //   id: "",
+  //   title: "",
+  // });
+  const [todo, setTodo] = useReducer(
+    (ar: any, arr: any) => ({
+      createdDate: new Date(),
+      description: "",
+      done: false,
+      id: "",
+      title: "",
+    }),
+    {
+      createdDate: new Date(),
+      description: "",
+      done: false,
+      id: "",
+      title: "",
+    },
+    (arg) => ({ ...arg })
+  );
   const [filterOption, setFilterOption] = useState("filter-all");
 
   //Refs
