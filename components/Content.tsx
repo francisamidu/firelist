@@ -1,15 +1,16 @@
 import React from "react";
 import { ContentProps } from "../types";
-import { Todos, Profile } from ".";
+import { Todos, Ideas } from ".";
 
 const Content = ({ name }: ContentProps) => {
   const renderComponent = () => {
     switch (name) {
-      case "profile":
-        return <Profile />;
-
-      default:
+      case "ideas": {
+        return <Ideas id="" title="" description="" />;
+      }
+      default: {
         return <Todos />;
+      }
     }
   };
   return <>{renderComponent()}</>;

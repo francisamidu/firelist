@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ListPlus as Icon, User } from "lucide-react";
+import { Bookmark, ListPlus as Icon, User } from "lucide-react";
 import { SidebarProps, Tab } from "../types";
 
 const Sidebar = ({ setComponent }: SidebarProps) => {
@@ -10,7 +10,7 @@ const Sidebar = ({ setComponent }: SidebarProps) => {
     },
     {
       active: false,
-      text: "Profile",
+      text: "Ideas",
     },
   ]);
   const handleClick = (text: string) => {
@@ -38,7 +38,7 @@ const Sidebar = ({ setComponent }: SidebarProps) => {
         );
       case "Profile":
         return (
-          <User
+          <Bookmark
             size={18}
             className={`${
               tab.active ? "text-white  mr-3" : "text-blue-gray-600 mr-3"

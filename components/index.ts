@@ -3,6 +3,7 @@ import Content from "./Content";
 import Dropdown from "./Dropdown";
 import Footer from "./Footer";
 import Header from "./Header";
+import Ideas from "./Ideas";
 import Layout from "./Layout";
 import MakeTodo from "./MakeTodo";
 import Navbar from "./Navbar";
@@ -19,6 +20,7 @@ export {
   Dropdown,
   Header,
   Footer,
+  Ideas,
   Layout,
   Navbar,
   MakeTodo,
