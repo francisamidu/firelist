@@ -139,7 +139,7 @@ const Ideas = () => {
           <>
             {filterOption === "filter-incomplete" ||
             filterOption === "filter-all" ? (
-              <div className="ideas-container">
+              <div className="flex flex-row flex-wrap mt-4">
                 {ideaList
                   .filter((t) => !t.done)
                   .map((idea) => (

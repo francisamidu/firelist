@@ -36,3 +36,9 @@ a {
 .todos-container label {
   padding: 12px;
 }
+.idea {
+  margin-bottom: 10px;
+}
+.idea:nth-child(even) {
+  margin-left: 10px;
+}
