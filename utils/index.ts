@@ -17,6 +17,7 @@ import {
   formatTime,
   formatTimeRelative,
 } from "./format";
+import generateRandomColor from "./generateRandomColor";
 import { sendPasswordResetCode } from "./password-reset";
 import { signin } from "./signin";
 import { signup } from "./signup";
@@ -29,6 +30,7 @@ export {
   deleteDoc,
   doc,
   collection,
+  generateRandomColor,
   getDoc,
   getDocs,
   formatDate,
