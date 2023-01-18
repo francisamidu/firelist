@@ -193,7 +193,7 @@ const Todos = () => {
             ) : null}
           </>
         ) : (
-          <NoContentCta addTodo={handleAddClick} />
+          <NoContentCta addItem={handleAddClick} />
         )}
       </div>
     </div>

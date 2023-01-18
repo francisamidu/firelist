@@ -3,7 +3,7 @@ import { BatteryLow } from "lucide-react";
 import { Button } from ".";
 import { NoContentCtaProps } from "../types";
 
-const NoContentCta = ({ addTodo }: NoContentCtaProps) => {
+const NoContentCta = ({ addItem }: NoContentCtaProps) => {
   return (
     <div className="w-full h-full">
       <div className="flex flex-col justify-center items-center p-3">
@@ -16,7 +16,7 @@ const NoContentCta = ({ addTodo }: NoContentCtaProps) => {
         <p className="text-blue-gray-700 text-center my-3">
           It appears you haven't created any todos
         </p>
-        <Button text="Create a new todo" className="mt-2" onClick={addTodo} />
+        <Button text="Create a new todo" className="mt-2" onClick={addItem} />
       </div>
     </div>
   );

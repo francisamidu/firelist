@@ -1,4 +1,4 @@
 type NoContentCtaProps = {
-  addTodo: () => void;
+  addItem: () => void;
 };
 export default NoContentCtaProps;

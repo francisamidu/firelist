@@ -4,7 +4,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "@material-tailwind/react";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
-import { TodosProvider } from "../contexts/TodosProvider";
+import { IdeasProvider, TodosProvider } from "../contexts";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -18,7 +18,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page: any) => page);
   return (
     <ThemeProvider>
-      <TodosProvider>{getLayout(<Component {...pageProps} />)}</TodosProvider>
+      <TodosProvider>
+        <IdeasProvider>{getLayout(<Component {...pageProps} />)}</IdeasProvider>
+      </TodosProvider>
     </ThemeProvider>
   );
 };

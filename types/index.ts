@@ -3,6 +3,7 @@ import ContentProps from "./ContentProps";
 import DialogProps from "./DialogProps";
 import DropdownProps from "./DropdownProps";
 import Idea from "./Idea";
+import IdeaProps from "./IdeaProps";
 import IpData from "./IpData";
 import IpDataResponse from "./IpDataResponse";
 import LayoutProps from "./LayoutProps";
@@ -21,6 +22,7 @@ export type {
   DialogProps,
   DropdownProps,
   Idea,
+  IdeaProps,
   IpData,
   IpDataResponse,
   LayoutProps,

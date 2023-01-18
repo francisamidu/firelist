@@ -1,7 +1,7 @@
 import React from "react";
-import { Idea as TIdea } from "../types";
+import { IdeaProps } from "../types";
 
-const Idea = ({ createdDate, description, done, id, tags, title }: TIdea) => {
+const Idea = ({ getIdea, removeIdea, setIdeas, idea, ideas }: IdeaProps) => {
   return <div>Idea</div>;
 };
 
