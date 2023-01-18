@@ -1,6 +1,6 @@
 import React from "react";
 import { IdeaProps } from "../types";
-import { generateRandomColors } from "../utils";
+import { generateRandomColor } from "../utils";
 
 const Idea = ({
   getIdea,
@@ -18,9 +18,9 @@ const Idea = ({
           <span
             key={tag}
             style={{
-              color: generateRandomColors(),
+              color: generateRandomColor(),
             }}
-            className="bg-gray-100 mx-1"
+            className="bg-gray-100 mx-1 uppercase text-sm"
           >
             {tag}
           </span>
