@@ -1,5 +1,6 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import {
+  Alert,
   Dialog,
   DialogBody,
   DialogFooter,
@@ -31,28 +32,37 @@ const MakeTodo = ({
   const [error, setError] = useState("");
 
   const handleSubmit = async () => {
-    const todosRef = collection(db, "todos");
-    if (todo?.title) {
-      await updateDoc(doc(db, "todos", todo.id), {
-        ...todoItem,
-        done: todo.done,
-      });
-      const newTodos = todos.map((t) => {
-        if (t.id === todo.id) {
-          t = {
-            ...todoItem,
-            done: todo.done,
-          };
+    try {
+      const todosRef = collection(db, "todos");
+      if (todo?.title) {
+        await updateDoc(doc(db, "todos", todo.id), {
+          ...todoItem,
+          done: todo.done,
+        });
+        const newTodos = todos.map((t) => {
+          if (t.id === todo.id) {
+            t = {
+              ...todoItem,
+              done: todo.done,
+            };
+          }
+          return t;
+        });
+        setTodos(newTodos);
+      } else {
+        if (todo?.description || todo?.title) {
+          await setDoc(doc(todosRef), todoItem);
+          const tempTodos = [todoItem, ...todos];
+          setTodos(tempTodos);
         }
-        return t;
-      });
-      setTodos(newTodos);
-    } else {
-      if (todo?.description || todo?.title) {
-        await setDoc(doc(todosRef), todoItem);
-        const tempTodos = [todoItem, ...todos];
-        setTodos(tempTodos);
       }
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "An unknown error occured";
+      setError(message);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
   };
   const resetTodoItem = () => {
@@ -90,6 +100,11 @@ const MakeTodo = ({
 
   return (
     <>
+      {error ? (
+        <Alert color="red" className="text-center">
+          <span>{error}</span>
+        </Alert>
+      ) : null}
       <Dialog
         open={open}
         handler={handleOpen}
