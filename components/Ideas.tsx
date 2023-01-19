@@ -37,6 +37,7 @@ const Ideas = () => {
     },
     (arg) => ({ ...arg })
   );
+  const [tag, setTag] = useState("");
   const [filterOption, setFilterOption] = useState("filter-all");
 
   //Refs
@@ -104,6 +105,13 @@ const Ideas = () => {
       console.log(error);
     }
   };
+  const handleSetTag = (tag?: string) => {
+    if (!tag) {
+      setTag("");
+      return;
+    }
+    setTag(tag);
+  };
 
   useEffect(() => {
     setIdeaList(ideas);
@@ -150,6 +158,7 @@ const Ideas = () => {
                       getIdea={handleIdeaClick}
                       removeIdea={handleRemoveIdea}
                       setIdeas={setIdeaList}
+                      setTag={setTag}
                     />
                   ))}
               </div>

@@ -114,7 +114,7 @@ const MakeIdea = ({
         className="p-2 rounded-md"
       >
         <p className="text-center !w-full py-2 text-2xl font-bold">
-          {!idea ? "Create a new task" : `Editing task #${idea.id}`}
+          {!idea ? "Create a new idea" : `Editing idea #${idea.id}`}
         </p>
         <DialogBody>
           <Input
@@ -125,7 +125,7 @@ const MakeIdea = ({
                 title: event.target.value,
               })
             }
-            placeholder="Task title here...."
+            placeholder="Idea title here...."
             value={ideaItem.title}
           />
           <Textarea
@@ -136,7 +136,7 @@ const MakeIdea = ({
                 description: event.target.value,
               })
             }
-            placeholder="Task Description"
+            placeholder="Idea Description"
             value={ideaItem.description}
           />
           {error ? (
