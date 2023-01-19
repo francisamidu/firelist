@@ -20,7 +20,7 @@ import { Idea } from "../types";
 import { collection, db, doc, setDoc, updateDoc } from "../utils";
 
 type MakeIdeaProps = {
-  idea?: Idea;
+  ideaId?: string;
   open: boolean;
   ideas: Idea[];
   resetIdea: () => void;
@@ -32,7 +32,7 @@ const MakeIdea = ({
   setOpen,
   setIdeas,
   resetIdea,
-  idea,
+  ideaId,
   ideas,
 }: MakeIdeaProps) => {
   const dialogRef: MutableRefObject<any> = useRef();
@@ -48,23 +48,23 @@ const MakeIdea = ({
 
   const handleSubmit = async () => {
     const ideasRef = collection(db, "ideas");
-    if (idea?.title) {
-      await updateDoc(doc(db, "ideas", idea.id), {
+    if (ideaItem?.title) {
+      await updateDoc(doc(db, "ideas", ideaItem.id), {
         ...ideaItem,
-        done: idea.done,
+        done: ideaItem.done,
       });
       const newIdeas = ideas.map((t) => {
-        if (t.id === idea.id) {
+        if (t.id === ideaItem.id) {
           t = {
             ...ideaItem,
-            done: idea.done,
+            done: ideaItem.done,
           };
         }
         return t;
       });
       setIdeas(newIdeas);
     } else {
-      if (idea?.description || idea?.title) {
+      if (ideaItem?.description || ideaItem?.title) {
         await setDoc(doc(ideasRef), ideaItem);
         const tempIdeas = [ideaItem, ...ideas];
         setIdeas(tempIdeas);
@@ -102,8 +102,9 @@ const MakeIdea = ({
   useClickOutside(dialogRef, handleClick);
 
   useEffect(() => {
+    const idea = ideas.find((i) => i.id === ideaId);
     if (idea) setIdeaItem({ ...idea });
-  }, [idea]);
+  }, []);
 
   return (
     <>
@@ -114,7 +115,7 @@ const MakeIdea = ({
         className="p-2 rounded-md"
       >
         <p className="text-center !w-full py-2 text-2xl font-bold">
-          {!idea ? "Create a new idea" : `Editing idea #${idea.id}`}
+          {!ideaId ? "Create a new idea" : `Editing idea #${ideaId}`}
         </p>
         <DialogBody>
           <Input
@@ -161,7 +162,9 @@ const MakeIdea = ({
             <Button
               className="py-2.5 hover:!shadow-none border-[1px] border-midnight-500 hover:!text-midnight-500 hover:!bg-white"
               onClick={handleOpen}
-              text={idea?.title || idea?.description ? "Update" : "Create"}
+              text={
+                ideaItem?.title || ideaItem?.description ? "Update" : "Create"
+              }
             />
           </div>
         </DialogFooter>

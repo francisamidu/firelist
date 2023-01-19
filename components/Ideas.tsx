@@ -120,7 +120,6 @@ const Ideas = () => {
     <div className="px-3 max-h-[100vh] overflow-y-auto">
       <MakeIdea
         open={open}
-        idea={idea}
         ideas={ideaList}
         resetIdea={handleResetIdea}
         setOpen={setOpen}
