@@ -1,5 +1,5 @@
 import { deleteDoc, doc } from "firebase/firestore";
-import { Plus } from "lucide-react";
+import { DeleteIcon, Plus } from "lucide-react";
 import React, {
   MutableRefObject,
   useEffect,
@@ -10,7 +10,6 @@ import React, {
 import { Idea } from ".";
 import { useIdeas } from "../contexts";
 import { db } from "../utils";
-import Dropdown from "./Dropdown";
 import MakeIdea from "./MakeIdea";
 import NoContentCta from "./NoContentCta";
 
@@ -129,10 +128,16 @@ const Ideas = () => {
       />
       <div className="flex flex-row items-center justify-between">
         <h1 className="my-2 font-bold text-blue-gray-800">Ideas</h1>
-        <div className="flex flex-row items-center">
-          {/* <Dropdown label="Sort" handler={handleDropdownClick} /> */}
-          <Dropdown label="Filter" handler={handleDropdownClick} />
-        </div>
+        {tag ? (
+          <p className="bg-white text-blue-500 p-1 px-2 rounded flex flex-row items-center">
+            <span className="text-sm">{tag}</span>
+            <DeleteIcon
+              className="text-blue-500 hover:cursor-pointer ml-2"
+              size={15}
+              onClick={() => handleSetTag()}
+            />
+          </p>
+        ) : null}
       </div>
       <div
         className="mt-5 flex flex-row items-center hover:cursor-pointer py-2 px-3 w-max bg-white rounded-md"
@@ -144,26 +149,24 @@ const Ideas = () => {
       </div>
       <div>
         {ideas.length > 0 ? (
-          <>
-            {filterOption === "filter-incomplete" ||
-            filterOption === "filter-all" ? (
-              <div className="flex flex-row flex-wrap mt-4">
-                {ideaList
-                  .filter((t) => !t.done)
-                  .map((idea) => (
-                    <Idea
-                      idea={idea}
-                      key={idea.id}
-                      ideas={ideaList}
-                      getIdea={handleIdeaClick}
-                      removeIdea={handleRemoveIdea}
-                      setIdeas={setIdeaList}
-                      setTag={setTag}
-                    />
-                  ))}
-              </div>
-            ) : null}
-          </>
+          <div className="flex flex-row flex-wrap mt-4">
+            {ideaList
+              .filter((t) => {
+                if (!tag) return t;
+                return t.tags.indexOf(tag) !== -1;
+              })
+              .map((idea) => (
+                <Idea
+                  idea={idea}
+                  key={idea.id}
+                  ideas={ideaList}
+                  getIdea={handleIdeaClick}
+                  removeIdea={handleRemoveIdea}
+                  setIdeas={setIdeaList}
+                  setTag={setTag}
+                />
+              ))}
+          </div>
         ) : (
           <NoContentCta addItem={handleAddClick} />
         )}
