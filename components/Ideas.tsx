@@ -44,41 +44,6 @@ const Ideas = () => {
 
   //Handlers
   const handleAddClick = () => setOpen(!open);
-  const handleDropdownClick = (option: string) => {
-    if (option.includes("filter")) {
-      setFilterOption(option);
-    }
-    switch (option) {
-      case "filter-completed": {
-        let temp1 = ideas.filter((t) => t.done === true);
-        setIdeaList(temp1);
-        break;
-      }
-      case "filter-incomplete": {
-        let temp2 = ideas.filter((t) => t.done !== true);
-        setIdeaList(temp2);
-        break;
-      }
-      case "sort-date-asc": {
-        let temp3 = ideas.sort((a, b) => {
-          return a.createdDate.getTime() > b.createdDate.getTime() ? 1 : -1;
-        });
-        setIdeaList(() => temp3);
-        break;
-      }
-      case "sort-date-desc": {
-        let temp4 = ideas.sort((a, b) => {
-          return a.createdDate.getTime() < b.createdDate.getTime() ? 1 : -1;
-        });
-        setIdeaList(() => temp4);
-        break;
-      }
-      default: {
-        setIdeaList(ideas);
-        break;
-      }
-    }
-  };
   const handleIdeaClick = (id: string) => {
     const ideaIndex = ideas.findIndex((t) => t.id === id);
     if (ideas[ideaIndex]) {

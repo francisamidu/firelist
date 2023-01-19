@@ -27,7 +27,7 @@ const Sidebar = ({ setComponent }: SidebarProps) => {
   };
   const renderIcon = (tab: Tab) => {
     switch (tab.text) {
-      case "Todos":
+      case "Todos": {
         return (
           <Icon
             size={18}
@@ -36,7 +36,8 @@ const Sidebar = ({ setComponent }: SidebarProps) => {
             }`}
           />
         );
-      case "Profile":
+      }
+      case "Ideas": {
         return (
           <Bookmark
             size={18}
@@ -45,8 +46,10 @@ const Sidebar = ({ setComponent }: SidebarProps) => {
             }`}
           />
         );
-      default:
+      }
+      default: {
         return null;
+      }
     }
   };
   return (

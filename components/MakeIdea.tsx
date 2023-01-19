@@ -39,7 +39,6 @@ const MakeIdea = ({
   const [ideaItem, setIdeaItem] = useState<Idea>({
     createdDate: new Date(),
     description: "",
-    done: false,
     id: Date.now().toString(),
     title: "",
     tags: [],
@@ -51,18 +50,9 @@ const MakeIdea = ({
     if (ideaItem?.title) {
       await updateDoc(doc(db, "ideas", ideaItem.id), {
         ...ideaItem,
-        done: ideaItem.done,
+        description: ideaItem.description,
+        title: ideaItem.title,
       });
-      const newIdeas = ideas.map((t) => {
-        if (t.id === ideaItem.id) {
-          t = {
-            ...ideaItem,
-            done: ideaItem.done,
-          };
-        }
-        return t;
-      });
-      setIdeas(newIdeas);
     } else {
       if (ideaItem?.description || ideaItem?.title) {
         await setDoc(doc(ideasRef), ideaItem);
@@ -75,7 +65,6 @@ const MakeIdea = ({
     setIdeaItem({
       createdDate: new Date(),
       description: "",
-      done: false,
       id: "",
       title: "",
       tags: [],
