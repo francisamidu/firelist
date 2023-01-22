@@ -23,38 +23,7 @@ const IdeasContext = createContext<{
 export const IdeasProvider = ({
   children,
 }: Partial<PropsWithChildren<ReactNode>>) => {
-  const [ideasList, setIdeaList] = useState<Idea[]>([
-    {
-      createdDate: new Date(),
-      description: "It just needs to adapt to the UI",
-      id: v4(),
-      title: "UX adjustments",
-      tags: ["UX"],
-    },
-    {
-      createdDate: new Date(),
-      description: "Add a field to let users link their slack accounts",
-      id: v4(),
-      title: "Slack Integrations",
-      tags: ["Slack", "Development"],
-    },
-    {
-      createdDate: new Date(),
-      description:
-        "Help businesses to clearly define their annual e-commerce digital strategy for creating a high-end plan",
-      id: v4(),
-      title: "Presentation",
-      tags: ["Planning"],
-    },
-    {
-      createdDate: new Date(),
-      description:
-        "Composing word to provide people with decision-making clarity when interacting with a product",
-      id: v4(),
-      title: "Copywriting of the app",
-      tags: ["Writing"],
-    },
-  ]);
+  const [ideasList, setIdeaList] = useState<Idea[]>([]);
 
   const getIdeas = async () => {
     try {
@@ -74,7 +43,8 @@ export const IdeasProvider = ({
 
   useEffect(() => {
     getIdeas();
-  }, []);
+    return () => setIdeaList([]);
+  }, [db]);
 
   return (
     <IdeasContext.Provider
